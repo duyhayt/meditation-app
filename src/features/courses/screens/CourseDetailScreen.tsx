@@ -21,18 +21,18 @@ export function CourseDetailScreen({ navigation, route }: Props): React.JSX.Elem
       heroImageUri={course?.coverImageUri}
       heroTitle={course?.title ?? t('courses.detailTitle')}
       heroSubtitle={course?.description ?? t('courses.detailSubtitle')}
-      heroEyebrow={`${course?.lessonCount ?? 0} lessons`}
+      heroEyebrow={t('courses.detailHeroEyebrow', { count: course?.lessonCount ?? 0 })}
       heroSize="compact"
       showBackButton
     >
-      <SectionHeader title="Lesson flow" description="Clear lesson rows make the course feel guided and practical." />
+      <SectionHeader title={t('courses.flowTitle')} description={t('courses.flowDescription')} />
       {lessons.map((lesson) => (
         <MeditationCard
           key={lesson.id}
           title={lesson.title}
           subtitle={course?.title ?? ''}
-          durationLabel={`${lesson.durationMinutes} min`}
-          metaLabel="Lesson"
+          durationLabel={t('common.minutesShort', { count: lesson.durationMinutes })}
+          metaLabel={t('courses.lessonMeta')}
           imageUri={lesson.coverImageUri}
           tone="course"
           onPress={() => navigation.navigate('CourseLessonPlayer', { courseId: route.params.courseId, lessonId: lesson.id })}

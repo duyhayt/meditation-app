@@ -12,9 +12,9 @@ export function SyncScreen(): React.JSX.Element {
       title={t('placeholders.syncTitle')}
       subtitle={t('common.placeholderDescription')}
       heroImageUri={mediaLibrary.clouds}
-      heroTitle="Sync placeholder, polished"
-      heroSubtitle="Future-facing routes are now visually aligned with the rest of the experience."
-      heroEyebrow="Sync"
+      heroTitle={t('placeholders.syncHeroTitle')}
+      heroSubtitle={t('placeholders.syncHeroSubtitle')}
+      heroEyebrow={t('placeholders.syncHeroEyebrow')}
       showBackButton
     >
       <EmptyState title={t('common.placeholderTitle')} description={t('common.placeholderDescription')} />

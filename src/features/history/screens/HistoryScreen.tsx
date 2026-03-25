@@ -16,14 +16,14 @@ export function HistoryScreen(): React.JSX.Element {
       decorativeBackground={false}
     >
       <AppCard elevated style={{ gap: 14 }}>
-        <ContentBadge label="Completed" icon="success" />
-        <AppText variant="title">Sleepy Body Scan</AppText>
-        <AppText variant="bodySmall">Last played tonight at 21:40</AppText>
+        <ContentBadge label={t('history.completed')} icon="success" />
+        <AppText variant="title">{t('history.firstTitle')}</AppText>
+        <AppText variant="bodySmall">{t('history.firstSubtitle')}</AppText>
       </AppCard>
       <AppCard elevated style={{ gap: 14 }}>
-        <ContentBadge label="Breathing" icon="breath" />
-        <AppText variant="title">Box Breathing</AppText>
-        <AppText variant="bodySmall">Practiced this morning before work</AppText>
+        <ContentBadge label={t('history.breathingBadge')} icon="breath" />
+        <AppText variant="title">{t('history.secondTitle')}</AppText>
+        <AppText variant="bodySmall">{t('history.secondSubtitle')}</AppText>
       </AppCard>
     </MeditationScreen>
   );

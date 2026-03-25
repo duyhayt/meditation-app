@@ -18,20 +18,20 @@ export function CourseListScreen({
       title={t('courses.title')}
       subtitle={t('courses.subtitle')}
       heroImageUri={meditationCourses[0]?.coverImageUri}
-      heroTitle="Structured paths, richer discovery"
-      heroSubtitle="Courses now feel editorial and premium instead of just another plain list."
-      heroEyebrow="Courses"
+      heroTitle={t('courses.heroTitle')}
+      heroSubtitle={t('courses.heroSubtitle')}
+      heroEyebrow={t('courses.heroEyebrow')}
       showBackButton
     >
-      <SectionHeader title="Featured journeys" description="Multi-lesson experiences that feel distinct from one-off meditations." />
+      <SectionHeader title={t('courses.featuredJourneysTitle')} description={t('courses.featuredJourneysDescription')} />
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.horizontalContent}>
         {meditationCourses.map((course) => (
           <View key={course.id} style={styles.card}>
             <MeditationCard
               title={course.title}
               subtitle={course.description}
-              durationLabel={`${course.totalMinutes} min`}
-              metaLabel={`${course.lessonCount} lessons`}
+              durationLabel={t('common.minutesShort', { count: course.totalMinutes })}
+              metaLabel={t('common.lessonCount', { count: course.lessonCount })}
               imageUri={course.coverImageUri}
               tone="course"
               onPress={() => navigation.navigate('CourseDetail', { courseId: course.id })}

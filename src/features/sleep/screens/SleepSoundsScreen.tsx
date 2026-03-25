@@ -18,13 +18,13 @@ export function SleepSoundsScreen(): React.JSX.Element {
       title={t('sleep.title')}
       subtitle={t('sleep.subtitle')}
       heroImageUri={sleepSounds[0]?.coverImageUri}
-      heroTitle="Night sounds for deeper rest"
-      heroSubtitle="A darker, softer visual language separates sleep from the rest of the app."
-      heroEyebrow="Sleep"
+      heroTitle={t('sleep.heroTitle')}
+      heroSubtitle={t('sleep.heroSubtitle')}
+      heroEyebrow={t('sleep.heroEyebrow')}
       heroSize="compact"
     >
       <View style={styles.section}>
-        <SectionHeader title="Ambient collection" description="Moonlit cards, deeper overlays, and calmer metadata help this tab feel distinct." />
+        <SectionHeader title={t('sleep.sectionTitle')} description={t('sleep.sectionDescription')} />
         <View style={styles.stack}>
           {sleepSounds.map((sound) => (
             <SleepCard

@@ -25,13 +25,13 @@ export function CategoryListScreen({
       title={t('meditate.categoryTitle')}
       subtitle={t('meditate.categorySubtitle')}
       heroImageUri={meditationCategories[0]?.coverImageUri}
-      heroTitle="Explore a calmer library"
-      heroSubtitle="Guided meditations, breathing rituals, and sleep content arranged like a real discovery app."
-      heroEyebrow="Meditate"
+      heroTitle={t('meditate.categoryHeroTitle')}
+      heroSubtitle={t('meditate.categoryHeroSubtitle')}
+      heroEyebrow={t('meditate.categoryHeroEyebrow')}
       showBackButton={false}
     >
       <View style={styles.section}>
-        <SectionHeader title="Featured paths" description="Explore the main moods and use cases first." />
+        <SectionHeader title={t('meditate.featuredPathsTitle')} description={t('meditate.featuredPathsDescription')} />
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.horizontalContent}>
           {meditationCategories.map((category) => (
             <View key={category.id} style={styles.categoryCard}>
@@ -50,12 +50,12 @@ export function CategoryListScreen({
       </View>
 
       <View style={styles.section}>
-        <SectionHeader title="Breathing rituals" description="Fast entry points for calm, focus, and recovery." />
+        <SectionHeader title={t('meditate.breathingSectionTitle')} description={t('meditate.breathingSectionDescription')} />
         <MeditationCard
           title={breathingExercises[0]?.title ?? ''}
           subtitle={breathingExercises[0]?.pattern ?? ''}
           durationLabel={breathingExercises[0]?.durationLabel ?? ''}
-          metaLabel="Guided"
+          metaLabel={t('meditate.breathingMeta')}
           imageUri={breathingExercises[0]?.coverImageUri ?? ''}
           tone="breathing"
           onPress={() => navigation.navigate('BreathingList')}
@@ -63,12 +63,12 @@ export function CategoryListScreen({
       </View>
 
       <View style={styles.section}>
-        <SectionHeader title="Courses" description="Structured series for habit building and deeper consistency." />
+        <SectionHeader title={t('meditate.coursesSectionTitle')} description={t('meditate.coursesSectionDescription')} />
         <MeditationCard
           title={meditationCourses[0]?.title ?? ''}
           subtitle={meditationCourses[0]?.description ?? ''}
-          durationLabel={`${meditationCourses[0]?.totalMinutes ?? 0} min`}
-          metaLabel={`${meditationCourses[0]?.lessonCount ?? 0} lessons`}
+          durationLabel={t('common.minutesShort', { count: meditationCourses[0]?.totalMinutes ?? 0 })}
+          metaLabel={t('common.lessonCount', { count: meditationCourses[0]?.lessonCount ?? 0 })}
           imageUri={meditationCourses[0]?.coverImageUri ?? ''}
           tone="course"
           onPress={() => navigation.navigate('CourseList')}

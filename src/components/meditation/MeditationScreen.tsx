@@ -86,7 +86,8 @@ const styles = StyleSheet.create({
     gap: 16
   },
   body: {
-    gap: 14
+    gap: 14,
+    top: 14,
   },
   backdropOne: {
     position: 'absolute',

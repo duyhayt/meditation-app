@@ -24,7 +24,15 @@ export function TabsNavigator(): React.JSX.Element {
           backgroundColor: theme.colors.background
         },
         tabBarActiveTintColor: theme.colors.primary,
-        tabBarInactiveTintColor: theme.colors.textMuted
+        tabBarInactiveTintColor: theme.colors.textMuted,
+        tabBarStyle: {
+          position: 'absolute',
+          height: 0,
+          backgroundColor: 'transparent',
+          borderTopWidth: 0,
+          elevation: 0,
+          shadowOpacity: 0
+        }
       }}
     >
       <Tabs.Screen name="HomeTab" component={HomeScreen} options={{ title: t('navigation.homeTab') }} />

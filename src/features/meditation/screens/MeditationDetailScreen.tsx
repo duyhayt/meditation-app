@@ -24,13 +24,13 @@ export function MeditationDetailScreen({ navigation, route }: Props): React.JSX.
       heroImageUri={meditation?.coverImageUri}
       heroTitle={meditation?.title ?? t('meditate.detailTitle')}
       heroSubtitle={meditation?.description ?? t('meditate.detailSubtitle')}
-      heroEyebrow={`${meditation?.teacher ?? ''} • ${meditation?.durationMinutes ?? 0} min`}
+      heroEyebrow={t('meditate.detailHeroEyebrow', { teacher: meditation?.teacher ?? '', count: meditation?.durationMinutes ?? 0 })}
       heroSize="compact"
       showBackButton
     >
       <View style={styles.badges}>
-        <ContentBadge label={`${meditation?.durationMinutes ?? 0} min`} icon="timer" />
-        <ContentBadge label={meditation?.level ?? 'Beginner'} icon="sparkles" />
+        <ContentBadge label={t('common.minutesShort', { count: meditation?.durationMinutes ?? 0 })} icon="timer" />
+        <ContentBadge label={meditation?.level ?? t('meditate.beginner')} icon="sparkles" />
         <ContentBadge label={meditation?.teacher ?? ''} icon="profile" />
       </View>
 
@@ -53,16 +53,16 @@ export function MeditationDetailScreen({ navigation, route }: Props): React.JSX.
         />
       </View>
 
-      <SectionHeader title="Why this session works" description="A richer detail layout gives the user confidence before pressing play." />
+      <SectionHeader title={t('meditate.whySectionTitle')} description={t('meditate.whySectionDescription')} />
       <AppCard elevated style={styles.noteCard}>
         <View style={styles.badges}>
-          <ContentBadge label="Detail UI" icon="sparkles" />
-          <ContentBadge label="Immersive" icon="favorite" />
+          <ContentBadge label={t('meditate.detailUiBadge')} icon="sparkles" />
+          <ContentBadge label={t('meditate.immersiveBadge')} icon="favorite" />
         </View>
         <View style={styles.noteText}>
-          <AppText variant="title">Soft visual hierarchy</AppText>
+          <AppText variant="title">{t('meditate.noteTitle')}</AppText>
           <AppText variant="bodySmall">
-            Cleaner metadata grouping and tighter CTA spacing make the session feel calmer and more trustworthy.
+            {t('meditate.noteDescription')}
           </AppText>
         </View>
       </AppCard>

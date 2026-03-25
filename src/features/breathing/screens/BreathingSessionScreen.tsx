@@ -21,11 +21,11 @@ export function BreathingSessionScreen({ route }: Props): React.JSX.Element {
       heroImageUri={exercise?.coverImageUri}
       heroTitle={exercise?.title ?? t('breathing.sessionTitle')}
       heroSubtitle={exercise?.pattern ?? t('breathing.sessionSubtitle')}
-      heroEyebrow="Session"
+      heroEyebrow={t('breathing.sessionHeroEyebrow')}
       showBackButton
     >
       <View style={styles.center}>
-        <AppText variant="display">4</AppText>
+        <AppText variant="display">{t('breathing.countdownLabel')}</AppText>
         <ContentBadge label={exercise?.pattern ?? ''} icon="breath" />
       </View>
     </MeditationScreen>

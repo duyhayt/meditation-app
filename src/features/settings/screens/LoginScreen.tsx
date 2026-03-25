@@ -12,9 +12,9 @@ export function LoginScreen(): React.JSX.Element {
       title={t('placeholders.loginTitle')}
       subtitle={t('common.placeholderDescription')}
       heroImageUri={mediaLibrary.silhouette}
-      heroTitle="Login can still look intentional"
-      heroSubtitle="Even placeholder screens should feel consistent with the product’s premium mood."
-      heroEyebrow="Login"
+      heroTitle={t('placeholders.loginHeroTitle')}
+      heroSubtitle={t('placeholders.loginHeroSubtitle')}
+      heroEyebrow={t('placeholders.loginHeroEyebrow')}
       showBackButton
     >
       <EmptyState title={t('common.placeholderTitle')} description={t('common.placeholderDescription')} />

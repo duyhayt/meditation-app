@@ -15,12 +15,23 @@ const en = {
     themeLight: 'Light',
     themeDark: 'Dark',
     reduceMotion: 'Reduce motion',
+    on: 'On',
+    off: 'Off',
+    guided: 'Guided',
+    lesson: 'Lesson',
+    breathingLabel: 'Breathing',
+    minutesShort: '{{count}} min',
+    lessonCount: '{{count}} lessons',
+    percentComplete: '{{value}}% complete',
     placeholderTitle: 'Planned for next phase',
     placeholderDescription: 'The structure is ready, and this route will be wired in a later phase.'
   },
   splash: {
     title: 'Meditation App',
-    subtitle: 'A calm, offline-first companion for meditation, sleep, and mindful routines.'
+    subtitle: 'A calm, offline-first companion for meditation, sleep, and mindful routines.',
+    eyebrow: 'Meditation App',
+    label: 'Offline-first meditation',
+    secondaryLabel: 'Calm, sleep, breathe'
   },
   onboarding: {
     eyebrow: 'Welcome',
@@ -32,7 +43,15 @@ const en = {
       one: 'Offline-first structure with local database at the center',
       two: 'Clear audio architecture for bundled, streamed, and downloaded sessions',
       three: 'Calm premium-style UI with full dark and light themes'
-    }
+    },
+    secondaryLabel: 'Offline-first',
+    sectionTitle: 'Built for a calmer first impression',
+    sectionDescription: 'The onboarding now feels visual and premium instead of purely informational.',
+    cardOneDuration: 'Foundation',
+    cardOneMeta: 'Phase 1',
+    cardTwoSubtitle: 'A richer visual system makes the product feel closer to a production meditation app.',
+    cardTwoDuration: 'Visual',
+    cardTwoMeta: 'Premium UI'
   },
   navigation: {
     homeTab: 'Home',
@@ -53,7 +72,13 @@ const en = {
     breathing: 'Breathing exercises',
     courses: 'Courses',
     sleep: 'Sleep sounds',
-    discover: 'Discover new calm'
+    discover: 'Discover new calm',
+    heroSecondaryLabel: '5 minutes',
+    lastSessionSubtitle: '{{teacher}} • {{count}} min',
+    progressLabel: '{{value}}% complete',
+    breathingDescription: 'Short visual sessions to reset your body and attention.',
+    breathingMeta: 'Breathing',
+    coursesDescription: 'Curated lesson journeys with a more structured pace.'
   },
   meditate: {
     categoryTitle: 'Meditation library',
@@ -63,17 +88,50 @@ const en = {
     detailTitle: 'Meditation detail',
     detailSubtitle: 'Preview the structure, save for later, or begin playback.',
     playerTitle: 'Player',
-    playerSubtitle: 'Phase 1 scaffolds the full-screen listening experience and flow.'
+    playerSubtitle: 'Phase 1 scaffolds the full-screen listening experience and flow.',
+    categoryHeroTitle: 'Explore a calmer library',
+    categoryHeroSubtitle: 'Guided meditations, breathing rituals, and sleep content arranged like a real discovery app.',
+    categoryHeroEyebrow: 'Meditate',
+    featuredPathsTitle: 'Featured paths',
+    featuredPathsDescription: 'Explore the main moods and use cases first.',
+    breathingSectionTitle: 'Breathing rituals',
+    breathingSectionDescription: 'Fast entry points for calm, focus, and recovery.',
+    breathingMeta: 'Guided',
+    coursesSectionTitle: 'Courses',
+    coursesSectionDescription: 'Structured series for habit building and deeper consistency.',
+    featuredSessionsTitle: 'Featured sessions',
+    featuredSessionsDescription: 'Designed to feel easy to browse, save, and start.',
+    detailHeroEyebrow: '{{teacher}} • {{count}} min',
+    beginner: 'Beginner',
+    whySectionTitle: 'Why this session works',
+    whySectionDescription: 'A richer detail layout gives the user confidence before pressing play.',
+    detailUiBadge: 'Detail UI',
+    immersiveBadge: 'Immersive',
+    noteTitle: 'Soft visual hierarchy',
+    noteDescription: 'Cleaner metadata grouping and tighter CTA spacing make the session feel calmer and more trustworthy.'
   },
   breathing: {
     title: 'Breathing exercises',
     subtitle: 'Simple patterns for focus, calm, and reset.',
     sessionTitle: 'Breathing session',
-    sessionSubtitle: 'A guided timer surface will be connected in the next phase.'
+    sessionSubtitle: 'A guided timer surface will be connected in the next phase.',
+    heroTitle: 'Visual breathing rituals',
+    heroSubtitle: 'Breathing gets a brighter, lighter treatment while staying connected to the same design system.',
+    heroEyebrow: 'Breathing',
+    sectionTitle: 'Choose a rhythm',
+    sectionDescription: 'A stronger card hierarchy helps each exercise feel guided before the timer even starts.',
+    cardMeta: 'Breathing',
+    sessionHeroEyebrow: 'Session',
+    countdownLabel: '4'
   },
   sleep: {
     title: 'Sleep sounds',
-    subtitle: 'Ambient soundscapes for bedtime or deep focus.'
+    subtitle: 'Ambient soundscapes for bedtime or deep focus.',
+    heroTitle: 'Night sounds for deeper rest',
+    heroSubtitle: 'A darker, softer visual language separates sleep from the rest of the app.',
+    heroEyebrow: 'Sleep',
+    sectionTitle: 'Ambient collection',
+    sectionDescription: 'Moonlit cards, deeper overlays, and calmer metadata help this tab feel distinct.'
   },
   courses: {
     title: 'Meditation courses',
@@ -81,23 +139,63 @@ const en = {
     detailTitle: 'Course detail',
     detailSubtitle: 'Review lessons, pace, and course outcomes.',
     lessonTitle: 'Lesson player',
-    lessonSubtitle: 'Course lesson playback will plug into the shared AudioService.'
+    lessonSubtitle: 'Course lesson playback will plug into the shared AudioService.',
+    heroTitle: 'Structured paths, richer discovery',
+    heroSubtitle: 'Courses now feel editorial and premium instead of just another plain list.',
+    heroEyebrow: 'Courses',
+    featuredJourneysTitle: 'Featured journeys',
+    featuredJourneysDescription: 'Multi-lesson experiences that feel distinct from one-off meditations.',
+    detailHeroEyebrow: '{{count}} lessons',
+    flowTitle: 'Lesson flow',
+    flowDescription: 'Clear lesson rows make the course feel guided and practical.',
+    lessonMeta: 'Lesson',
+    lessonPlayerHeroSubtitle: 'A lightweight lesson detail that routes into the shared player without changing playback logic.',
+    lessonPlayerHeroEyebrow: 'Course lesson',
+    openSharedPlayer: 'Open shared player'
   },
   favorites: {
     title: 'Favorites',
-    subtitle: 'Your saved meditations, sounds, and lessons.'
+    subtitle: 'Your saved meditations, sounds, and lessons.',
+    emptyDescription: 'Favorites persistence will plug in next, but this screen should stay calm and functional rather than overly decorative.'
   },
   progress: {
     title: 'Progress',
-    subtitle: 'Daily streaks, total mindful minutes, and completion trends.'
+    subtitle: 'Daily streaks, total mindful minutes, and completion trends.',
+    heroTitle: 'Progress should feel encouraging',
+    heroSubtitle: 'Larger insight cards and calmer spacing make stats feel motivating instead of clinical.',
+    heroEyebrow: 'Progress',
+    sectionTitle: 'Habit signals',
+    sectionDescription: 'A calmer rhythm between insight cards makes stats easier to scan.',
+    streakTitle: 'Daily streak',
+    streakSubtitle: 'A more visual card for streaks and daily habit confidence.',
+    streakDuration: '1 day',
+    streakMeta: '5 min goal',
+    minutesTitle: 'Mindful minutes',
+    minutesSubtitle: 'Daily progress and completion rules will attach here in later phases.',
+    minutesDuration: '24 min',
+    minutesMeta: 'This week'
   },
   history: {
     title: 'History',
-    subtitle: 'A local timeline of sessions and listening moments.'
+    subtitle: 'A local timeline of sessions and listening moments.',
+    completed: 'Completed',
+    firstTitle: 'Sleepy Body Scan',
+    firstSubtitle: 'Last played tonight at 21:40',
+    breathingBadge: 'Breathing',
+    secondTitle: 'Box Breathing',
+    secondSubtitle: 'Practiced this morning before work'
   },
   reminders: {
     title: 'Reminder center',
-    subtitle: 'Schedule daily mindfulness locally and prepare for notification integration.'
+    subtitle: 'Schedule daily mindfulness locally and prepare for notification integration.',
+    enabled: 'Enabled',
+    morning: 'Morning',
+    dailyMorningTitle: 'Daily morning reminder',
+    dailyMorningSubtitle: '07:00 • A softer start to the day.',
+    planned: 'Planned',
+    night: 'Night',
+    eveningTitle: 'Evening wind-down reminder',
+    eveningSubtitle: '21:30 • Return to calm before bed.'
   },
   settings: {
     title: 'Settings',
@@ -108,13 +206,55 @@ const en = {
     premium: 'Premium',
     login: 'Login',
     sync: 'Sync',
-    account: 'Account'
+    account: 'Account',
+    appearanceDescription: 'Compact controls fit this screen better than large media cards.',
+    reduceMotionDescription: 'Reduce motion in transitions and decorative animations.',
+    accountSectionDescription: 'Placeholder routes stay available, but the layout is now more practical.',
+    statusActive: 'Active'
   },
   placeholders: {
     premiumTitle: 'Premium placeholder',
     loginTitle: 'Login placeholder',
     syncTitle: 'Sync placeholder',
-    accountTitle: 'Account placeholder'
+    accountTitle: 'Account placeholder',
+    premiumHeroTitle: 'Premium, visually ready',
+    premiumHeroSubtitle: 'The route remains placeholder-backed, but the presentation no longer feels unfinished.',
+    premiumHeroEyebrow: 'Premium',
+    loginHeroTitle: 'Login can still look intentional',
+    loginHeroSubtitle: 'Even placeholder screens should feel consistent with the product’s premium mood.',
+    loginHeroEyebrow: 'Login',
+    syncHeroTitle: 'Sync placeholder, polished',
+    syncHeroSubtitle: 'Future-facing routes are now visually aligned with the rest of the experience.',
+    syncHeroEyebrow: 'Sync',
+    accountHeroTitle: 'Account surface, ready later',
+    accountHeroSubtitle: 'The route is still placeholder-only, but the UI now fits the premium meditation product better.',
+    accountHeroEyebrow: 'Account'
+  },
+  audio: {
+    heroTitle: 'A calmer full-screen player',
+    heroSubtitle: 'Large visual cover, fewer controls, and stronger focus on playback state.',
+    remainingLabel: '12:34 remaining',
+    resume: 'Resume',
+    pause: 'Pause',
+    downloadLater: 'Download later',
+    contentTypeMeditation: 'Meditation',
+    contentTypeCourseLesson: 'Course lesson',
+    contentTypeSleepSound: 'Sleep sound'
+  },
+  profile: {
+    title: 'Profile',
+    subtitle: 'A quieter place for your progress, saved sessions, and preferences.',
+    summaryTitle: 'Tonight feels lighter',
+    summarySubtitle: 'Your personal space for favorites, progress, reminders, and settings.',
+    librarySectionTitle: 'Library & progress',
+    librarySectionDescription: 'Core areas you visit often should feel fast and clear.',
+    savedMeta: 'Saved',
+    insightsMeta: 'Insights',
+    recentMeta: 'Recent',
+    preferencesSectionTitle: 'Preferences',
+    preferencesSectionDescription: 'Utilities stay more compact and less decorative here.',
+    dailyMeta: 'Daily',
+    localMeta: 'Local'
   }
 } as const;
 

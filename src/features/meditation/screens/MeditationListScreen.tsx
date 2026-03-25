@@ -24,16 +24,16 @@ export function MeditationListScreen({ navigation, route }: Props): React.JSX.El
       heroImageUri={category?.coverImageUri}
       heroTitle={category?.title ?? t('meditate.listTitle')}
       heroSubtitle={category?.subtitle ?? t('meditate.listSubtitle')}
-      heroEyebrow={category?.ambientLabel ?? 'Guided'}
+      heroEyebrow={category?.ambientLabel ?? t('common.guided')}
       showBackButton
     >
-      <SectionHeader title="Featured sessions" description="Designed to feel easy to browse, save, and start." />
+      <SectionHeader title={t('meditate.featuredSessionsTitle')} description={t('meditate.featuredSessionsDescription')} />
       {items.map((item) => (
         <MeditationCard
           key={item.id}
           title={item.title}
           subtitle={item.description}
-          durationLabel={`${item.durationMinutes} min`}
+          durationLabel={t('common.minutesShort', { count: item.durationMinutes })}
           metaLabel={`${item.teacher} • ${item.level}`}
           imageUri={item.coverImageUri}
           tone={item.tone === 'sleep' ? 'course' : 'meditation'}

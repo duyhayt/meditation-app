@@ -28,7 +28,7 @@ export function SettingsScreen({ navigation }: { navigation: { navigate: (name: 
       showBackButton
       decorativeBackground={false}
     >
-      <SectionHeader title={t('settings.appearance')} description="Compact controls fit this screen better than large media cards." />
+      <SectionHeader title={t('settings.appearance')} description={t('settings.appearanceDescription')} />
       <AppCard elevated style={{ gap: theme.spacing.lg }}>
         <View style={styles.group}>
           <AppText variant="title">{t('common.language')}</AppText>
@@ -77,13 +77,13 @@ export function SettingsScreen({ navigation }: { navigation: { navigate: (name: 
         <SettingItem
           icon="sparkles"
           title={t('common.reduceMotion')}
-          description="Reduce motion in transitions and decorative animations."
-          trailingText={reduceMotionEnabled ? 'On' : 'Off'}
+          description={t('settings.reduceMotionDescription')}
+          trailingText={reduceMotionEnabled ? t('common.on') : t('common.off')}
           onPress={() => setReduceMotionEnabled(!reduceMotionEnabled)}
         />
       </AppCard>
 
-      <SectionHeader title={t('settings.accountSection')} description="Placeholder routes stay available, but the layout is now more practical." />
+      <SectionHeader title={t('settings.accountSection')} description={t('settings.accountSectionDescription')} />
       <AppCard elevated style={{ gap: 2 }}>
         <SettingItem icon="premium" title={t('settings.premium')} description={t('common.placeholderDescription')} onPress={() => navigation.navigate('Premium')} />
         <SettingItem icon="account" title={t('settings.login')} description={t('common.placeholderDescription')} onPress={() => navigation.navigate('Login')} />

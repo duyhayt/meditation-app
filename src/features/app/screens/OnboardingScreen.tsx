@@ -20,22 +20,22 @@ export function OnboardingScreen(): React.JSX.Element {
         eyebrow={t('onboarding.eyebrow')}
         title={t('onboarding.title')}
         subtitle={t('onboarding.subtitle')}
-        secondaryLabel="Offline-first"
+        secondaryLabel={t('onboarding.secondaryLabel')}
       />
 
-      <SectionHeader title="Built for a calmer first impression" description="The onboarding now feels visual and premium instead of purely informational." />
+      <SectionHeader title={t('onboarding.sectionTitle')} description={t('onboarding.sectionDescription')} />
       <MeditationCard
         title={t('onboarding.bullets.one')}
         subtitle={t('onboarding.bullets.two')}
-        durationLabel="Foundation"
-        metaLabel="Phase 1"
+        durationLabel={t('onboarding.cardOneDuration')}
+        metaLabel={t('onboarding.cardOneMeta')}
         imageUri={mediaLibrary.sunriseMeditation}
       />
       <MeditationCard
         title={t('onboarding.bullets.three')}
-        subtitle="A richer visual system makes the product feel closer to a production meditation app."
-        durationLabel="Visual"
-        metaLabel="Premium UI"
+        subtitle={t('onboarding.cardTwoSubtitle')}
+        durationLabel={t('onboarding.cardTwoDuration')}
+        metaLabel={t('onboarding.cardTwoMeta')}
         imageUri={mediaLibrary.moonSky}
         tone="course"
       />

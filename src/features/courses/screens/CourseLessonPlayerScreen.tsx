@@ -20,14 +20,14 @@ export function CourseLessonPlayerScreen({ navigation, route }: Props): React.JS
       subtitle={t('courses.lessonSubtitle')}
       heroImageUri={lesson?.coverImageUri}
       heroTitle={lesson?.title ?? t('courses.lessonTitle')}
-      heroSubtitle="A lightweight lesson detail that routes into the shared player without changing playback logic."
-      heroEyebrow="Course lesson"
+      heroSubtitle={t('courses.lessonPlayerHeroSubtitle')}
+      heroEyebrow={t('courses.lessonPlayerHeroEyebrow')}
       showBackButton
     >
       <View style={styles.stack}>
-        <ContentBadge label={`${lesson?.durationMinutes ?? 0} min`} icon="timer" />
+        <ContentBadge label={t('common.minutesShort', { count: lesson?.durationMinutes ?? 0 })} icon="timer" />
         <AppButton
-          label="Open shared player"
+          label={t('courses.openSharedPlayer')}
           iconLeft="play"
           onPress={() =>
             navigation.navigate('AudioPlayer', {

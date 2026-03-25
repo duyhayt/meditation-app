@@ -18,23 +18,23 @@ export function ReminderCenterScreen(): React.JSX.Element {
     >
       <AppCard elevated style={styles.card}>
         <View style={styles.badges}>
-          <ContentBadge label="Enabled" icon="timer" />
-          <ContentBadge label="Morning" icon="sparkles" />
+          <ContentBadge label={t('reminders.enabled')} icon="timer" />
+          <ContentBadge label={t('reminders.morning')} icon="sparkles" />
         </View>
         <View style={styles.copy}>
-          <AppText variant="title">Daily morning reminder</AppText>
-          <AppText variant="bodySmall">07:00 • A softer start to the day.</AppText>
+          <AppText variant="title">{t('reminders.dailyMorningTitle')}</AppText>
+          <AppText variant="bodySmall">{t('reminders.dailyMorningSubtitle')}</AppText>
         </View>
       </AppCard>
 
       <AppCard elevated style={styles.card}>
         <View style={styles.badges}>
-          <ContentBadge label="Planned" icon="moon" />
-          <ContentBadge label="Night" icon="sparkles" />
+          <ContentBadge label={t('reminders.planned')} icon="moon" />
+          <ContentBadge label={t('reminders.night')} icon="sparkles" />
         </View>
         <View style={styles.copy}>
-          <AppText variant="title">Evening wind-down reminder</AppText>
-          <AppText variant="bodySmall">21:30 • Return to calm before bed.</AppText>
+          <AppText variant="title">{t('reminders.eveningTitle')}</AppText>
+          <AppText variant="bodySmall">{t('reminders.eveningSubtitle')}</AppText>
         </View>
       </AppCard>
     </MeditationScreen>

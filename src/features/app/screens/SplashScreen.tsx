@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 
 import { AppText } from '@/components/common/AppText';
@@ -12,20 +13,21 @@ type SplashScreenProps = {
 };
 
 export function SplashScreen({ title, subtitle }: SplashScreenProps): React.JSX.Element {
+  const { t } = useTranslation();
   const theme = useTheme();
 
   return (
     <Screen centered contentStyle={styles.content}>
       <View style={styles.stack}>
         <AppText variant="label" color={theme.colors.primary}>
-          Offline-first meditation
+          {t('splash.label')}
         </AppText>
         <HeroCard
           imageUri={mediaLibrary.sunriseMeditation}
-          eyebrow="Meditation App"
+          eyebrow={t('splash.eyebrow')}
           title={title}
           subtitle={subtitle}
-          secondaryLabel="Calm, sleep, breathe"
+          secondaryLabel={t('splash.secondaryLabel')}
         />
       </View>
     </Screen>

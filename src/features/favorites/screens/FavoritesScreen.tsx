@@ -15,7 +15,7 @@ export function FavoritesScreen(): React.JSX.Element {
     >
       <EmptyState
         title={t('favorites.title')}
-        description="Favorites persistence will plug in next, but this screen should stay calm and functional rather than overly decorative."
+        description={t('favorites.emptyDescription')}
       />
     </MeditationScreen>
   );

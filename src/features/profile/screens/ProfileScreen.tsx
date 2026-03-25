@@ -18,8 +18,8 @@ export function ProfileScreen(): React.JSX.Element {
 
   return (
     <MeditationScreen
-      title="Profile"
-      subtitle="A quieter place for your progress, saved sessions, and preferences."
+      title={t('profile.title')}
+      subtitle={t('profile.subtitle')}
       decorativeBackground={false}
     >
       <AppCard elevated style={{ padding: theme.spacing.xxl }}>
@@ -38,50 +38,50 @@ export function ProfileScreen(): React.JSX.Element {
             </AppText>
           </View>
           <View style={styles.copy}>
-            <AppText variant="heading2">Tonight feels lighter</AppText>
+            <AppText variant="heading2">{t('profile.summaryTitle')}</AppText>
             <AppText variant="bodySmall">
-              Your personal space for favorites, progress, reminders, and settings.
+              {t('profile.summarySubtitle')}
             </AppText>
           </View>
         </View>
       </AppCard>
 
-      <SectionHeader title="Library & progress" description="Core areas you visit often should feel fast and clear." />
+      <SectionHeader title={t('profile.librarySectionTitle')} description={t('profile.librarySectionDescription')} />
       <ProfileShortcutCard
         icon="favorites"
         title={t('favorites.title')}
         description={t('favorites.subtitle')}
-        meta="Saved"
+        meta={t('profile.savedMeta')}
         onPress={() => navigation.navigate('Favorites')}
       />
       <ProfileShortcutCard
         icon="progress"
         title={t('progress.title')}
         description={t('progress.subtitle')}
-        meta="Insights"
+        meta={t('profile.insightsMeta')}
         onPress={() => navigation.navigate('Progress')}
       />
       <ProfileShortcutCard
         icon="history"
         title={t('history.title')}
         description={t('history.subtitle')}
-        meta="Recent"
+        meta={t('profile.recentMeta')}
         onPress={() => navigation.navigate('History')}
       />
 
-      <SectionHeader title="Preferences" description="Utilities stay more compact and less decorative here." />
+      <SectionHeader title={t('profile.preferencesSectionTitle')} description={t('profile.preferencesSectionDescription')} />
       <ProfileShortcutCard
         icon="reminder"
         title={t('reminders.title')}
         description={t('reminders.subtitle')}
-        meta="Daily"
+        meta={t('profile.dailyMeta')}
         onPress={() => navigation.navigate('ReminderCenter')}
       />
       <ProfileShortcutCard
         icon="settings"
         title={t('settings.title')}
         description={t('settings.subtitle')}
-        meta="Local"
+        meta={t('profile.localMeta')}
         onPress={() => navigation.navigate('Settings')}
       />
     </MeditationScreen>

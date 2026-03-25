@@ -12,9 +12,9 @@ export function AccountScreen(): React.JSX.Element {
       title={t('placeholders.accountTitle')}
       subtitle={t('common.placeholderDescription')}
       heroImageUri={mediaLibrary.mountainLake}
-      heroTitle="Account surface, ready later"
-      heroSubtitle="The route is still placeholder-only, but the UI now fits the premium meditation product better."
-      heroEyebrow="Account"
+      heroTitle={t('placeholders.accountHeroTitle')}
+      heroSubtitle={t('placeholders.accountHeroSubtitle')}
+      heroEyebrow={t('placeholders.accountHeroEyebrow')}
       showBackButton
     >
       <EmptyState title={t('common.placeholderTitle')} description={t('common.placeholderDescription')} />

@@ -30,7 +30,7 @@ export function HomeScreen(): React.JSX.Element {
       heroSubtitle={t('home.featuredSubtitle')}
       heroEyebrow={t('home.discover')}
       heroPrimaryActionLabel={t('home.quickStart')}
-      heroSecondaryLabel="5 minutes"
+      heroSecondaryLabel={t('home.heroSecondaryLabel')}
       heroSize="compact"
       onHeroPrimaryAction={() =>
         navigation.navigate('AudioPlayer', {
@@ -43,8 +43,8 @@ export function HomeScreen(): React.JSX.Element {
       <ContinueSessionCard
         imageUri={lastSession.coverImageUri}
         title={lastSession.title}
-        subtitle={`${lastSession.teacher} • ${lastSession.durationMinutes} min`}
-        progressLabel="42% complete"
+        subtitle={t('home.lastSessionSubtitle', { teacher: lastSession.teacher, count: lastSession.durationMinutes })}
+        progressLabel={t('home.progressLabel', { value: 42 })}
         onPress={() =>
           navigation.navigate('AudioPlayer', {
             contentId: lastSession.id,
@@ -70,26 +70,26 @@ export function HomeScreen(): React.JSX.Element {
         ))}
       </ScrollView>
 
-      <SectionHeader title={t('home.breathing')} description="Short visual sessions to reset your body and attention." />
+      <SectionHeader title={t('home.breathing')} description={t('home.breathingDescription')} />
       <MeditationCard
         title={breathingExercises[0]?.title ?? ''}
         subtitle={breathingExercises[0]?.pattern ?? ''}
         durationLabel={breathingExercises[0]?.durationLabel ?? ''}
-        metaLabel="Breathing"
+        metaLabel={t('home.breathingMeta')}
         imageUri={breathingExercises[0]?.coverImageUri ?? ''}
         tone="breathing"
         onPress={() => navigation.navigate('BreathingList')}
       />
 
-      <SectionHeader title={t('home.courses')} description="Curated lesson journeys with a more structured pace." />
+      <SectionHeader title={t('home.courses')} description={t('home.coursesDescription')} />
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.horizontalContent}>
         {meditationCourses.map((course) => (
           <View key={course.id} style={styles.courseCard}>
             <MeditationCard
               title={course.title}
               subtitle={course.description}
-              durationLabel={`${course.totalMinutes} min`}
-              metaLabel={`${course.lessonCount} lessons`}
+              durationLabel={t('common.minutesShort', { count: course.totalMinutes })}
+              metaLabel={t('common.lessonCount', { count: course.lessonCount })}
               imageUri={course.coverImageUri}
               tone="course"
               onPress={() => navigation.navigate('CourseDetail', { courseId: course.id })}

@@ -15,28 +15,34 @@ export function AudioPlayerScreen({ route }: Props): React.JSX.Element {
   const { t } = useTranslation();
   const isSleep = route.params.contentType === 'sleep_sound';
   const imageUri = isSleep ? mediaLibrary.moonSky : mediaLibrary.sunriseMeditation;
+  const heroEyebrow =
+    route.params.contentType === 'sleep_sound'
+      ? t('audio.contentTypeSleepSound')
+      : route.params.contentType === 'course_lesson'
+        ? t('audio.contentTypeCourseLesson')
+        : t('audio.contentTypeMeditation');
 
   return (
     <MeditationScreen
       title={t('meditate.playerTitle')}
       subtitle={t('meditate.playerSubtitle')}
       heroImageUri={imageUri}
-      heroTitle="A calmer full-screen player"
-      heroSubtitle="Large visual cover, fewer controls, and stronger focus on playback state."
-      heroEyebrow={route.params.contentType}
+      heroTitle={t('audio.heroTitle')}
+      heroSubtitle={t('audio.heroSubtitle')}
+      heroEyebrow={heroEyebrow}
       heroSize="compact"
       showBackButton
     >
       <AppCard elevated style={styles.playerCard}>
         <View style={styles.badges}>
-          <ContentBadge label="12:34 remaining" icon="timer" />
+          <ContentBadge label={t('audio.remainingLabel')} icon="timer" />
           <ContentBadge label={route.params.contentId} icon="headphones" />
         </View>
       </AppCard>
       <View style={styles.controls}>
-        <AppButton label="Resume" iconLeft="play" />
-        <AppButton label="Pause" iconLeft="pause" variant="secondary" />
-        <AppButton label="Download later" iconLeft="download" variant="outline" />
+        <AppButton label={t('audio.resume')} iconLeft="play" />
+        <AppButton label={t('audio.pause')} iconLeft="pause" variant="secondary" />
+        <AppButton label={t('audio.downloadLater')} iconLeft="download" variant="outline" />
       </View>
     </MeditationScreen>
   );

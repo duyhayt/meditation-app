@@ -81,10 +81,12 @@ export function AppBottomTabBar({
 
 const styles = StyleSheet.create({
   container: {
+    position: 'absolute',
+    left: 16,
+    right: 16,
+    bottom: 16,
     flexDirection: 'row',
-    marginHorizontal: 16,
-    marginBottom: 16,
-    padding: 8,
+    padding: 4,
     borderWidth: 1
   },
   tab: {

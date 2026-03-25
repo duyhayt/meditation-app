@@ -12,9 +12,9 @@ export function PremiumScreen(): React.JSX.Element {
       title={t('placeholders.premiumTitle')}
       subtitle={t('common.placeholderDescription')}
       heroImageUri={mediaLibrary.moonSky}
-      heroTitle="Premium, visually ready"
-      heroSubtitle="The route remains placeholder-backed, but the presentation no longer feels unfinished."
-      heroEyebrow="Premium"
+      heroTitle={t('placeholders.premiumHeroTitle')}
+      heroSubtitle={t('placeholders.premiumHeroSubtitle')}
+      heroEyebrow={t('placeholders.premiumHeroEyebrow')}
       showBackButton
     >
       <EmptyState title={t('common.placeholderTitle')} description={t('common.placeholderDescription')} />

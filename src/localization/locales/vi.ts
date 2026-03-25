@@ -15,12 +15,23 @@ const vi = {
     themeLight: 'Sáng',
     themeDark: 'Tối',
     reduceMotion: 'Giảm chuyển động',
+    on: 'Bật',
+    off: 'Tắt',
+    guided: 'Hướng dẫn',
+    lesson: 'Bài học',
+    breathingLabel: 'Thở',
+    minutesShort: '{{count}} min',
+    lessonCount: '{{count}} bài học',
+    percentComplete: '{{value}}% hoàn thành',
     placeholderTitle: 'Để dành cho phase sau',
     placeholderDescription: 'Cấu trúc route đã sẵn sàng và sẽ được nối logic ở phase tiếp theo.'
   },
   splash: {
     title: 'Meditation App',
-    subtitle: 'Ứng dụng đồng hành nhẹ nhàng cho thiền, giấc ngủ và thói quen chánh niệm theo hướng offline-first.'
+    subtitle: 'Ứng dụng đồng hành nhẹ nhàng cho thiền, giấc ngủ và thói quen chánh niệm theo hướng offline-first.',
+    eyebrow: 'Meditation App',
+    label: 'Thiền theo hướng offline-first',
+    secondaryLabel: 'Bình tâm, ngủ sâu, hít thở'
   },
   onboarding: {
     eyebrow: 'Chào mừng',
@@ -32,7 +43,15 @@ const vi = {
       one: 'Kiến trúc offline-first với local database là trung tâm',
       two: 'Kiến trúc audio rõ ràng cho bundled, stream và downloaded',
       three: 'Giao diện tối giản, thư giãn, đầy đủ dark mode và light mode'
-    }
+    },
+    secondaryLabel: 'Offline-first',
+    sectionTitle: 'Thiết kế cho ấn tượng đầu tiên dịu hơn',
+    sectionDescription: 'Onboarding giờ trực quan và cao cấp hơn thay vì chỉ mang tính thông tin.',
+    cardOneDuration: 'Nền tảng',
+    cardOneMeta: 'Phase 1',
+    cardTwoSubtitle: 'Hệ thống hình ảnh giàu hơn giúp sản phẩm gần với một ứng dụng thiền production hơn.',
+    cardTwoDuration: 'Hình ảnh',
+    cardTwoMeta: 'Premium UI'
   },
   navigation: {
     homeTab: 'Home',
@@ -53,7 +72,13 @@ const vi = {
     breathing: 'Bài tập thở',
     courses: 'Khoá học',
     sleep: 'Âm thanh ngủ',
-    discover: 'Khám phá nội dung dịu hơn'
+    discover: 'Khám phá nội dung dịu hơn',
+    heroSecondaryLabel: '5 phút',
+    lastSessionSubtitle: '{{teacher}} • {{count}} min',
+    progressLabel: '{{value}}% hoàn thành',
+    breathingDescription: 'Các phiên ngắn, trực quan để đưa cơ thể và sự chú ý trở lại trạng thái cân bằng.',
+    breathingMeta: 'Thở',
+    coursesDescription: 'Những hành trình bài học được tuyển chọn với nhịp độ có cấu trúc hơn.'
   },
   meditate: {
     categoryTitle: 'Thư viện thiền',
@@ -63,17 +88,50 @@ const vi = {
     detailTitle: 'Chi tiết bài thiền',
     detailSubtitle: 'Xem nhanh cấu trúc, lưu lại hoặc bắt đầu phát.',
     playerTitle: 'Trình phát',
-    playerSubtitle: 'Phase 1 dựng sẵn trải nghiệm player toàn màn hình và luồng điều hướng.'
+    playerSubtitle: 'Phase 1 dựng sẵn trải nghiệm player toàn màn hình và luồng điều hướng.',
+    categoryHeroTitle: 'Khám phá thư viện dịu hơn',
+    categoryHeroSubtitle: 'Guided meditation, bài thở và nội dung ngủ được sắp như một app khám phá thật sự.',
+    categoryHeroEyebrow: 'Thiền',
+    featuredPathsTitle: 'Lối vào nổi bật',
+    featuredPathsDescription: 'Khám phá trước những tâm trạng và trường hợp sử dụng chính.',
+    breathingSectionTitle: 'Nghi thức thở',
+    breathingSectionDescription: 'Các điểm vào nhanh cho bình tĩnh, tập trung và phục hồi.',
+    breathingMeta: 'Hướng dẫn',
+    coursesSectionTitle: 'Khoá học',
+    coursesSectionDescription: 'Chuỗi nội dung có cấu trúc để xây dựng thói quen và sự đều đặn sâu hơn.',
+    featuredSessionsTitle: 'Phiên nổi bật',
+    featuredSessionsDescription: 'Thiết kế để dễ duyệt, lưu lại và bắt đầu.',
+    detailHeroEyebrow: '{{teacher}} • {{count}} min',
+    beginner: 'Người mới bắt đầu',
+    whySectionTitle: 'Vì sao phiên này hiệu quả',
+    whySectionDescription: 'Bố cục chi tiết giàu hơn giúp người dùng tự tin trước khi nhấn phát.',
+    detailUiBadge: 'Chi tiết UI',
+    immersiveBadge: 'Đắm chìm',
+    noteTitle: 'Phân cấp thị giác mềm mại',
+    noteDescription: 'Nhóm metadata gọn hơn và khoảng cách CTA chặt hơn làm phiên nghe bình tĩnh và đáng tin cậy hơn.'
   },
   breathing: {
     title: 'Bài tập thở',
     subtitle: 'Những pattern đơn giản cho tập trung, bình tĩnh và reset.',
     sessionTitle: 'Phiên thở',
-    sessionSubtitle: 'Màn hình timer hướng dẫn sẽ được nối logic ở phase tiếp theo.'
+    sessionSubtitle: 'Màn hình timer hướng dẫn sẽ được nối logic ở phase tiếp theo.',
+    heroTitle: 'Nghi thức thở trực quan',
+    heroSubtitle: 'Trải nghiệm thở sáng hơn, nhẹ hơn nhưng vẫn đi cùng một hệ thiết kế.',
+    heroEyebrow: 'Thở',
+    sectionTitle: 'Chọn một nhịp thở',
+    sectionDescription: 'Phân cấp thẻ rõ hơn giúp mỗi bài tập đã mang cảm giác được dẫn dắt trước cả khi timer bắt đầu.',
+    cardMeta: 'Thở',
+    sessionHeroEyebrow: 'Phiên',
+    countdownLabel: '4'
   },
   sleep: {
     title: 'Âm thanh ngủ',
-    subtitle: 'Không gian âm thanh dịu nhẹ cho trước giờ ngủ hoặc lúc cần tập trung sâu.'
+    subtitle: 'Không gian âm thanh dịu nhẹ cho trước giờ ngủ hoặc lúc cần tập trung sâu.',
+    heroTitle: 'Âm thanh đêm cho giấc nghỉ sâu hơn',
+    heroSubtitle: 'Ngôn ngữ hình ảnh tối hơn, mềm hơn giúp khu vực ngủ tách biệt với phần còn lại của ứng dụng.',
+    heroEyebrow: 'Ngủ',
+    sectionTitle: 'Bộ sưu tập ambient',
+    sectionDescription: 'Thẻ tối hơn, overlay sâu hơn và metadata dịu hơn giúp tab này có bản sắc riêng.'
   },
   courses: {
     title: 'Khoá học thiền',
@@ -81,23 +139,63 @@ const vi = {
     detailTitle: 'Chi tiết khoá học',
     detailSubtitle: 'Xem danh sách lesson, nhịp độ và mục tiêu của course.',
     lessonTitle: 'Player bài học',
-    lessonSubtitle: 'Playback lesson sẽ dùng chung AudioService ở phase tiếp theo.'
+    lessonSubtitle: 'Playback lesson sẽ dùng chung AudioService ở phase tiếp theo.',
+    heroTitle: 'Lộ trình có cấu trúc, khám phá giàu hơn',
+    heroSubtitle: 'Khoá học giờ mang cảm giác biên tập và cao cấp hơn thay vì chỉ là một danh sách phẳng.',
+    heroEyebrow: 'Khoá học',
+    featuredJourneysTitle: 'Hành trình nổi bật',
+    featuredJourneysDescription: 'Các trải nghiệm nhiều bài học đủ khác biệt so với những bài thiền đơn lẻ.',
+    detailHeroEyebrow: '{{count}} bài học',
+    flowTitle: 'Luồng bài học',
+    flowDescription: 'Các dòng lesson rõ ràng làm khoá học trở nên dễ theo và thực tế hơn.',
+    lessonMeta: 'Bài học',
+    lessonPlayerHeroSubtitle: 'Một lớp chi tiết gọn nhẹ cho bài học trước khi đi vào shared player mà không đổi logic playback.',
+    lessonPlayerHeroEyebrow: 'Bài học trong khoá',
+    openSharedPlayer: 'Mở shared player'
   },
   favorites: {
     title: 'Yêu thích',
-    subtitle: 'Những bài thiền, âm thanh và lesson bạn đã lưu.'
+    subtitle: 'Những bài thiền, âm thanh và lesson bạn đã lưu.',
+    emptyDescription: 'Favorites sẽ được nối persistence ở bước tiếp theo, nhưng màn này vẫn nên bình tĩnh và thực dụng thay vì quá trang trí.'
   },
   progress: {
     title: 'Tiến trình',
-    subtitle: 'Streak hằng ngày, tổng số phút thiền và xu hướng hoàn thành.'
+    subtitle: 'Streak hằng ngày, tổng số phút thiền và xu hướng hoàn thành.',
+    heroTitle: 'Tiến trình nên mang cảm giác được khích lệ',
+    heroSubtitle: 'Những thẻ insight lớn hơn và khoảng thở dịu hơn khiến thống kê truyền động lực thay vì lạnh lùng.',
+    heroEyebrow: 'Tiến trình',
+    sectionTitle: 'Tín hiệu thói quen',
+    sectionDescription: 'Nhịp điệu dịu hơn giữa các thẻ insight giúp số liệu dễ quét hơn.',
+    streakTitle: 'Chuỗi ngày đều đặn',
+    streakSubtitle: 'Một thẻ trực quan hơn cho streak và cảm giác tự tin với thói quen hằng ngày.',
+    streakDuration: '1 ngày',
+    streakMeta: 'Mục tiêu 5 phút',
+    minutesTitle: 'Phút chánh niệm',
+    minutesSubtitle: 'Luật tính tiến độ và hoàn thành hằng ngày sẽ được gắn vào đây ở phase sau.',
+    minutesDuration: '24 phút',
+    minutesMeta: 'Tuần này'
   },
   history: {
     title: 'Lịch sử',
-    subtitle: 'Dòng thời gian local của các phiên nghe và thiền.'
+    subtitle: 'Dòng thời gian local của các phiên nghe và thiền.',
+    completed: 'Hoàn tất',
+    firstTitle: 'Quét cơ thể buồn ngủ',
+    firstSubtitle: 'Nghe lần cuối tối nay lúc 21:40',
+    breathingBadge: 'Thở',
+    secondTitle: 'Box Breathing',
+    secondSubtitle: 'Đã thực hành sáng nay trước giờ làm'
   },
   reminders: {
     title: 'Trung tâm nhắc nhở',
-    subtitle: 'Lưu lịch thiền hằng ngày trên máy và chuẩn bị cho tích hợp notification.'
+    subtitle: 'Lưu lịch thiền hằng ngày trên máy và chuẩn bị cho tích hợp notification.',
+    enabled: 'Đang bật',
+    morning: 'Buổi sáng',
+    dailyMorningTitle: 'Nhắc nhở mỗi sáng',
+    dailyMorningSubtitle: '07:00 • Khởi đầu ngày mới mềm mại hơn.',
+    planned: 'Đã lên kế hoạch',
+    night: 'Ban đêm',
+    eveningTitle: 'Nhắc nhở thư giãn buổi tối',
+    eveningSubtitle: '21:30 • Trở về sự bình tĩnh trước giờ ngủ.'
   },
   settings: {
     title: 'Cài đặt',
@@ -108,13 +206,55 @@ const vi = {
     premium: 'Premium',
     login: 'Đăng nhập',
     sync: 'Đồng bộ',
-    account: 'Tài khoản'
+    account: 'Tài khoản',
+    appearanceDescription: 'Các điều khiển gọn hơn phù hợp màn này hơn so với media card lớn.',
+    reduceMotionDescription: 'Giảm chuyển động trong transition và các animation trang trí.',
+    accountSectionDescription: 'Các route placeholder vẫn sẵn sàng, nhưng layout giờ thực dụng hơn.',
+    statusActive: 'Đang dùng'
   },
   placeholders: {
     premiumTitle: 'Placeholder Premium',
     loginTitle: 'Placeholder đăng nhập',
     syncTitle: 'Placeholder đồng bộ',
-    accountTitle: 'Placeholder tài khoản'
+    accountTitle: 'Placeholder tài khoản',
+    premiumHeroTitle: 'Premium đã sẵn sàng về mặt hình ảnh',
+    premiumHeroSubtitle: 'Route này vẫn đang dùng placeholder, nhưng cách trình bày không còn mang cảm giác dang dở.',
+    premiumHeroEyebrow: 'Premium',
+    loginHeroTitle: 'Đăng nhập vẫn có thể trông chỉn chu',
+    loginHeroSubtitle: 'Ngay cả màn placeholder cũng nên đồng nhất với cảm giác cao cấp của sản phẩm.',
+    loginHeroEyebrow: 'Đăng nhập',
+    syncHeroTitle: 'Placeholder sync, đã được làm mượt',
+    syncHeroSubtitle: 'Các route cho tương lai giờ đã đồng bộ về mặt hình ảnh với phần còn lại của trải nghiệm.',
+    syncHeroEyebrow: 'Đồng bộ',
+    accountHeroTitle: 'Bề mặt tài khoản, để dành cho sau',
+    accountHeroSubtitle: 'Route này vẫn chỉ là placeholder, nhưng UI giờ phù hợp hơn với một sản phẩm thiền cao cấp.',
+    accountHeroEyebrow: 'Tài khoản'
+  },
+  audio: {
+    heroTitle: 'Một player toàn màn hình bình tĩnh hơn',
+    heroSubtitle: 'Artwork lớn hơn, ít điều khiển hơn và tập trung mạnh hơn vào trạng thái playback.',
+    remainingLabel: 'Còn 12:34',
+    resume: 'Tiếp tục phát',
+    pause: 'Tạm dừng',
+    downloadLater: 'Tải sau',
+    contentTypeMeditation: 'Thiền',
+    contentTypeCourseLesson: 'Bài học',
+    contentTypeSleepSound: 'Âm thanh ngủ'
+  },
+  profile: {
+    title: 'Hồ sơ',
+    subtitle: 'Nơi yên tĩnh hơn cho tiến trình, nội dung đã lưu và các tuỳ chọn của bạn.',
+    summaryTitle: 'Tối nay nhẹ hơn một chút',
+    summarySubtitle: 'Không gian cá nhân cho yêu thích, tiến trình, nhắc nhở và cài đặt.',
+    librarySectionTitle: 'Thư viện và tiến trình',
+    librarySectionDescription: 'Những khu vực bạn ghé nhiều nên tạo cảm giác nhanh và rõ.',
+    savedMeta: 'Đã lưu',
+    insightsMeta: 'Insight',
+    recentMeta: 'Gần đây',
+    preferencesSectionTitle: 'Tuỳ chọn',
+    preferencesSectionDescription: 'Các tiện ích ở đây nên gọn hơn và ít trang trí hơn.',
+    dailyMeta: 'Hằng ngày',
+    localMeta: 'Local'
   }
 } as const;
 
