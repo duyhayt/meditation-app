@@ -1,9 +1,11 @@
 import { useTranslation } from 'react-i18next';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Pressable } from 'react-native';
 
+import { AppCard } from '@/components/common/AppCard';
 import { AppText } from '@/components/common/AppText';
-import { FeatureCard } from '@/components/meditation/FeatureCard';
+import { SectionHeader } from '@/components/common/SectionHeader';
 import { MeditationScreen } from '@/components/meditation/MeditationScreen';
+import { SettingItem } from '@/components/settings/SettingItem';
 import { useTheme } from '@/hooks/useTheme';
 import { usePreferencesStore, type ThemePreference } from '@/state/preferences.store';
 
@@ -20,76 +22,80 @@ export function SettingsScreen({ navigation }: { navigation: { navigate: (name: 
   const setReduceMotionEnabled = usePreferencesStore((state) => state.setReduceMotionEnabled);
 
   return (
-    <MeditationScreen eyebrow="S18" title={t('settings.title')} subtitle={t('settings.subtitle')}>
-      <View style={styles.section}>
-        <AppText variant="title">{t('common.language')}</AppText>
-        <View style={styles.row}>
-          {(['vi', 'en'] as const).map((item) => (
-            <Pressable
-              key={item}
-              onPress={() => setLanguage(item)}
-              style={[
-                styles.chip,
-                {
-                  backgroundColor: language === item ? theme.colors.chipActive : theme.colors.chip,
-                  borderColor: theme.colors.border,
-                  borderRadius: theme.radius.pill
-                }
-              ]}
-            >
-              <AppText variant="bodyStrong">{item.toUpperCase()}</AppText>
-            </Pressable>
-          ))}
+    <MeditationScreen
+      title={t('settings.title')}
+      subtitle={t('settings.subtitle')}
+      showBackButton
+      decorativeBackground={false}
+    >
+      <SectionHeader title={t('settings.appearance')} description="Compact controls fit this screen better than large media cards." />
+      <AppCard elevated style={{ gap: theme.spacing.lg }}>
+        <View style={styles.group}>
+          <AppText variant="title">{t('common.language')}</AppText>
+          <View style={styles.row}>
+            {(['vi', 'en'] as const).map((item) => (
+              <Pressable
+                key={item}
+                onPress={() => setLanguage(item)}
+                style={[
+                  styles.chip,
+                  {
+                    backgroundColor: language === item ? theme.colors.chipActive : theme.colors.chip,
+                    borderColor: theme.colors.border,
+                    borderRadius: theme.radius.pill
+                  }
+                ]}
+              >
+                <AppText variant="bodyStrong">{item.toUpperCase()}</AppText>
+              </Pressable>
+            ))}
+          </View>
         </View>
-      </View>
 
-      <View style={styles.section}>
-        <AppText variant="title">{t('common.theme')}</AppText>
-        <View style={styles.row}>
-          {themeOptions.map((item) => (
-            <Pressable
-              key={item}
-              onPress={() => setThemePreference(item)}
-              style={[
-                styles.chip,
-                {
-                  backgroundColor: themePreference === item ? theme.colors.chipActive : theme.colors.chip,
-                  borderColor: theme.colors.border,
-                  borderRadius: theme.radius.pill
-                }
-              ]}
-            >
-              <AppText variant="bodyStrong">{t(`common.theme${item.charAt(0).toUpperCase()}${item.slice(1)}`)}</AppText>
-            </Pressable>
-          ))}
+        <View style={styles.group}>
+          <AppText variant="title">{t('common.theme')}</AppText>
+          <View style={styles.row}>
+            {themeOptions.map((item) => (
+              <Pressable
+                key={item}
+                onPress={() => setThemePreference(item)}
+                style={[
+                  styles.chip,
+                  {
+                    backgroundColor: themePreference === item ? theme.colors.chipActive : theme.colors.chip,
+                    borderColor: theme.colors.border,
+                    borderRadius: theme.radius.pill
+                  }
+                ]}
+              >
+                <AppText variant="bodyStrong">{t(`common.theme${item.charAt(0).toUpperCase()}${item.slice(1)}`)}</AppText>
+              </Pressable>
+            ))}
+          </View>
         </View>
-      </View>
 
-      <Pressable
-        onPress={() => setReduceMotionEnabled(!reduceMotionEnabled)}
-        style={[
-          styles.toggle,
-          {
-            backgroundColor: theme.colors.surfaceElevated,
-            borderColor: theme.colors.border,
-            borderRadius: theme.radius.xl
-          }
-        ]}
-      >
-        <AppText variant="title">{t('common.reduceMotion')}</AppText>
-        <AppText variant="bodySmall">{reduceMotionEnabled ? 'On' : 'Off'}</AppText>
-      </Pressable>
+        <SettingItem
+          icon="sparkles"
+          title={t('common.reduceMotion')}
+          description="Reduce motion in transitions and decorative animations."
+          trailingText={reduceMotionEnabled ? 'On' : 'Off'}
+          onPress={() => setReduceMotionEnabled(!reduceMotionEnabled)}
+        />
+      </AppCard>
 
-      <FeatureCard icon="premium" title={t('settings.premium')} description={t('common.placeholderDescription')} onPress={() => navigation.navigate('Premium')} />
-      <FeatureCard icon="account" title={t('settings.login')} description={t('common.placeholderDescription')} onPress={() => navigation.navigate('Login')} />
-      <FeatureCard icon="sync" title={t('settings.sync')} description={t('common.placeholderDescription')} onPress={() => navigation.navigate('Sync')} />
-      <FeatureCard icon="profile" title={t('settings.account')} description={t('common.placeholderDescription')} onPress={() => navigation.navigate('Account')} />
+      <SectionHeader title={t('settings.accountSection')} description="Placeholder routes stay available, but the layout is now more practical." />
+      <AppCard elevated style={{ gap: 2 }}>
+        <SettingItem icon="premium" title={t('settings.premium')} description={t('common.placeholderDescription')} onPress={() => navigation.navigate('Premium')} />
+        <SettingItem icon="account" title={t('settings.login')} description={t('common.placeholderDescription')} onPress={() => navigation.navigate('Login')} />
+        <SettingItem icon="sync" title={t('settings.sync')} description={t('common.placeholderDescription')} onPress={() => navigation.navigate('Sync')} />
+        <SettingItem icon="profile" title={t('settings.account')} description={t('common.placeholderDescription')} onPress={() => navigation.navigate('Account')} />
+      </AppCard>
     </MeditationScreen>
   );
 }
 
 const styles = StyleSheet.create({
-  section: {
+  group: {
     gap: 12
   },
   row: {
@@ -101,10 +107,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingHorizontal: 16,
     paddingVertical: 10
-  },
-  toggle: {
-    borderWidth: 1,
-    padding: 16,
-    gap: 4
   }
 });

@@ -1,14 +1,30 @@
 import { useTranslation } from 'react-i18next';
 
-import { FeatureCard } from '@/components/meditation/FeatureCard';
+import { AppCard } from '@/components/common/AppCard';
+import { AppText } from '@/components/common/AppText';
+import { ContentBadge } from '@/components/common/ContentBadge';
 import { MeditationScreen } from '@/components/meditation/MeditationScreen';
 
 export function HistoryScreen(): React.JSX.Element {
   const { t } = useTranslation();
 
   return (
-    <MeditationScreen eyebrow="S16" title={t('history.title')} subtitle={t('history.subtitle')}>
-      <FeatureCard icon="history" title="Recent sessions" description="Session history table and restore logic come in later phases." />
+    <MeditationScreen
+      title={t('history.title')}
+      subtitle={t('history.subtitle')}
+      showBackButton
+      decorativeBackground={false}
+    >
+      <AppCard elevated style={{ gap: 14 }}>
+        <ContentBadge label="Completed" icon="success" />
+        <AppText variant="title">Sleepy Body Scan</AppText>
+        <AppText variant="bodySmall">Last played tonight at 21:40</AppText>
+      </AppCard>
+      <AppCard elevated style={{ gap: 14 }}>
+        <ContentBadge label="Breathing" icon="breath" />
+        <AppText variant="title">Box Breathing</AppText>
+        <AppText variant="bodySmall">Practiced this morning before work</AppText>
+      </AppCard>
     </MeditationScreen>
   );
 }

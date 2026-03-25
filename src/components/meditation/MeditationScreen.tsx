@@ -1,16 +1,26 @@
 import { type PropsWithChildren } from 'react';
 import { StyleSheet, View } from 'react-native';
 
+import { AppHeader } from '@/components/common/AppHeader';
+import { HeroCard } from '@/components/common/HeroCard';
 import { Screen } from '@/components/ui/Screen';
 import { useTheme } from '@/hooks/useTheme';
-
-import { AppText } from '../common/AppText';
 
 type MeditationScreenProps = PropsWithChildren<{
   eyebrow?: string;
   title: string;
-  subtitle: string;
+  subtitle?: string;
   scrollable?: boolean;
+  showBackButton?: boolean;
+  heroImageUri?: string;
+  heroTitle?: string;
+  heroSubtitle?: string;
+  heroEyebrow?: string;
+  heroPrimaryActionLabel?: string;
+  heroSecondaryLabel?: string;
+  onHeroPrimaryAction?: () => void;
+  decorativeBackground?: boolean;
+  heroSize?: 'default' | 'compact';
 }>;
 
 export function MeditationScreen({
@@ -18,43 +28,54 @@ export function MeditationScreen({
   eyebrow,
   title,
   subtitle,
-  scrollable = true
+  scrollable = true,
+  showBackButton = false,
+  heroImageUri,
+  heroTitle,
+  heroSubtitle,
+  heroEyebrow,
+  heroPrimaryActionLabel,
+  heroSecondaryLabel,
+  onHeroPrimaryAction,
+  decorativeBackground = true,
+  heroSize = 'default'
 }: MeditationScreenProps): React.JSX.Element {
   const theme = useTheme();
 
   return (
-    <Screen scrollable={scrollable} contentStyle={styles.content}>
-      <View
-        style={[
-          styles.backdropOne,
-          { backgroundColor: theme.colors.heroStart, borderRadius: theme.radius.pill }
-        ]}
-      />
-      <View
-        style={[
-          styles.backdropTwo,
-          { backgroundColor: theme.colors.heroEnd, borderRadius: theme.radius.pill }
-        ]}
-      />
-      <View
-        style={[
-          styles.hero,
-          {
-            backgroundColor: theme.colors.surface,
-            borderColor: theme.colors.border,
-            borderRadius: theme.radius.xxl,
-            padding: theme.spacing.xxl
-          }
-        ]}
-      >
-        {eyebrow ? (
-          <AppText variant="label" color={theme.colors.primary}>
-            {eyebrow}
-          </AppText>
-        ) : null}
-        <AppText variant="heading1">{title}</AppText>
-        <AppText variant="bodySmall">{subtitle}</AppText>
-      </View>
+    <Screen scrollable={scrollable} contentStyle={styles.content} safeAreaEdges={['top', 'left', 'right', 'bottom']}>
+      {decorativeBackground ? (
+        <>
+          <View
+            style={[
+              styles.backdropOne,
+              { backgroundColor: theme.colors.heroGlow, borderRadius: theme.radius.pill }
+            ]}
+          />
+          <View
+            style={[
+              styles.backdropTwo,
+              { backgroundColor: theme.colors.heroAccent, borderRadius: theme.radius.pill }
+            ]}
+          />
+        </>
+      ) : null}
+
+      <AppHeader title={title} eyebrow={eyebrow} subtitle={subtitle} showBackButton={showBackButton} />
+
+      {heroImageUri && heroTitle && heroSubtitle ? (
+        <HeroCard
+          imageUri={heroImageUri}
+          eyebrow={heroEyebrow ?? eyebrow ?? title}
+          title={heroTitle}
+          subtitle={heroSubtitle}
+          size={heroSize}
+          primaryActionLabel={heroPrimaryActionLabel}
+          secondaryLabel={heroSecondaryLabel}
+          onPrimaryAction={onHeroPrimaryAction}
+        />
+      ) : null}
+
       <View style={styles.body}>{children}</View>
     </Screen>
   );
@@ -62,29 +83,25 @@ export function MeditationScreen({
 
 const styles = StyleSheet.create({
   content: {
-    gap: 20
-  },
-  hero: {
-    borderWidth: 1,
-    overflow: 'hidden'
+    gap: 16
   },
   body: {
-    gap: 16
+    gap: 14
   },
   backdropOne: {
     position: 'absolute',
-    top: 40,
-    right: 12,
+    top: 20,
+    right: -12,
     width: 120,
     height: 120,
-    opacity: 0.35
+    opacity: 0.32
   },
   backdropTwo: {
     position: 'absolute',
-    top: 120,
-    left: 20,
-    width: 88,
-    height: 88,
-    opacity: 0.25
+    top: 140,
+    left: -18,
+    width: 100,
+    height: 100,
+    opacity: 0.24
   }
 });

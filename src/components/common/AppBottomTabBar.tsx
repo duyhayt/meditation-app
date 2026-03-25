@@ -1,5 +1,5 @@
 import type { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { Pressable, View } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 
 import { useTheme } from '@/hooks/useTheme';
 
@@ -9,7 +9,7 @@ import { AppText } from './AppText';
 const routeIconMap = {
   HomeTab: 'home',
   MeditateTab: 'meditate',
-  SleepTab: 'sleep',
+  SleepTab: 'moon',
   ProfileTab: 'profile'
 } as const;
 
@@ -22,17 +22,14 @@ export function AppBottomTabBar({
 
   return (
     <View
-      style={{
-        flexDirection: 'row',
-        marginHorizontal: theme.spacing.lg,
-        marginBottom: theme.spacing.lg,
-        padding: theme.spacing.sm,
-        borderRadius: theme.radius.xxl,
-        backgroundColor: theme.colors.tabBar,
-        borderWidth: 1,
-        borderColor: theme.colors.border,
-        ...theme.shadows.floating
-      }}
+      style={[
+        styles.container,
+        {
+          backgroundColor: theme.colors.tabBar,
+          borderColor: theme.colors.border,
+          borderRadius: theme.radius.xxxl
+        }
+      ]}
     >
       {state.routes.map((route, index) => {
         const focused = state.index === index;
@@ -48,21 +45,30 @@ export function AppBottomTabBar({
           <Pressable
             key={route.key}
             onPress={() => navigation.navigate(route.name)}
-            style={{
-              flex: 1,
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: 4,
-              minHeight: 56,
-              borderRadius: theme.radius.xl,
-              backgroundColor: focused ? theme.colors.chipActive : 'transparent'
-            }}
+            style={({ pressed }) => [
+              styles.tab,
+              {
+                backgroundColor: focused ? theme.colors.surfaceElevated : 'transparent',
+                borderRadius: theme.radius.xxl,
+                opacity: pressed ? 0.88 : 1
+              }
+            ]}
           >
-            <AppIcon
-              name={routeIconMap[route.name as keyof typeof routeIconMap]}
-              color={focused ? theme.colors.primary : theme.colors.iconMuted}
-              size={theme.iconSize.lg}
-            />
+            <View
+              style={[
+                styles.iconWrap,
+                {
+                  backgroundColor: focused ? theme.colors.chipActive : 'transparent',
+                  borderRadius: theme.radius.pill
+                }
+              ]}
+            >
+              <AppIcon
+                name={routeIconMap[route.name as keyof typeof routeIconMap]}
+                color={focused ? theme.colors.primary : theme.colors.iconMuted}
+                size={theme.iconSize.md}
+              />
+            </View>
             <AppText variant="caption" color={focused ? theme.colors.primary : theme.colors.textMuted}>
               {label}
             </AppText>
@@ -72,3 +78,27 @@ export function AppBottomTabBar({
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    marginHorizontal: 16,
+    marginBottom: 16,
+    padding: 8,
+    borderWidth: 1
+  },
+  tab: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+    minHeight: 62,
+    paddingVertical: 6
+  },
+  iconWrap: {
+    width: 34,
+    height: 34,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
+});

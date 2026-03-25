@@ -2,10 +2,12 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 
+import { AppButton } from '@/components/common/AppButton';
+import { AppCard } from '@/components/common/AppCard';
 import { AppText } from '@/components/common/AppText';
-import { FeatureCard } from '@/components/meditation/FeatureCard';
+import { ContentBadge } from '@/components/common/ContentBadge';
+import { SectionHeader } from '@/components/common/SectionHeader';
 import { MeditationScreen } from '@/components/meditation/MeditationScreen';
-import { Button } from '@/components/ui/Button';
 import { getMeditationById } from '@/features/meditation/data/phase-one-content';
 import type { RootStackParamList } from '@/types/navigation';
 
@@ -17,13 +19,25 @@ export function MeditationDetailScreen({ navigation, route }: Props): React.JSX.
 
   return (
     <MeditationScreen
-      eyebrow="S06"
       title={t('meditate.detailTitle')}
       subtitle={meditation?.description ?? t('meditate.detailSubtitle')}
+      heroImageUri={meditation?.coverImageUri}
+      heroTitle={meditation?.title ?? t('meditate.detailTitle')}
+      heroSubtitle={meditation?.description ?? t('meditate.detailSubtitle')}
+      heroEyebrow={`${meditation?.teacher ?? ''} • ${meditation?.durationMinutes ?? 0} min`}
+      heroSize="compact"
+      showBackButton
     >
+      <View style={styles.badges}>
+        <ContentBadge label={`${meditation?.durationMinutes ?? 0} min`} icon="timer" />
+        <ContentBadge label={meditation?.level ?? 'Beginner'} icon="sparkles" />
+        <ContentBadge label={meditation?.teacher ?? ''} icon="profile" />
+      </View>
+
       <View style={styles.actions}>
-        <Button
-          label="Play now"
+        <AppButton
+          label={t('common.playNow')}
+          iconLeft="play"
           onPress={() =>
             navigation.navigate('AudioPlayer', {
               contentId: route.params.meditationId,
@@ -31,23 +45,44 @@ export function MeditationDetailScreen({ navigation, route }: Props): React.JSX.
             })
           }
         />
-        <Button label="Set reminder" variant="secondary" onPress={() => navigation.navigate('ReminderCenter')} />
+        <AppButton
+          label={t('common.setReminder')}
+          iconLeft="reminder"
+          variant="secondary"
+          onPress={() => navigation.navigate('ReminderCenter')}
+        />
       </View>
 
-      <AppText variant="title">{meditation?.title ?? 'Meditation session'}</AppText>
-      <FeatureCard
-        icon="favorite"
-        eyebrow={`${meditation?.durationMinutes ?? 0} min`}
-        title="Favorites + downloads are scaffolded next"
-        description="Phase 1 focuses on flow, navigation, design tokens, theme, and multilingual foundations."
-        meta={meditation?.teacher}
-      />
+      <SectionHeader title="Why this session works" description="A richer detail layout gives the user confidence before pressing play." />
+      <AppCard elevated style={styles.noteCard}>
+        <View style={styles.badges}>
+          <ContentBadge label="Detail UI" icon="sparkles" />
+          <ContentBadge label="Immersive" icon="favorite" />
+        </View>
+        <View style={styles.noteText}>
+          <AppText variant="title">Soft visual hierarchy</AppText>
+          <AppText variant="bodySmall">
+            Cleaner metadata grouping and tighter CTA spacing make the session feel calmer and more trustworthy.
+          </AppText>
+        </View>
+      </AppCard>
     </MeditationScreen>
   );
 }
 
 const styles = StyleSheet.create({
+  badges: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8
+  },
   actions: {
     gap: 12
+  },
+  noteCard: {
+    gap: 10
+  },
+  noteText: {
+    gap: 4
   }
 });

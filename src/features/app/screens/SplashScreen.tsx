@@ -1,7 +1,9 @@
 import { StyleSheet, View } from 'react-native';
 
 import { AppText } from '@/components/common/AppText';
+import { HeroCard } from '@/components/common/HeroCard';
 import { Screen } from '@/components/ui/Screen';
+import { mediaLibrary } from '@/features/meditation/data/phase-one-content';
 import { useTheme } from '@/hooks/useTheme';
 
 type SplashScreenProps = {
@@ -14,21 +16,17 @@ export function SplashScreen({ title, subtitle }: SplashScreenProps): React.JSX.
 
   return (
     <Screen centered contentStyle={styles.content}>
-      <View
-        style={[
-          styles.mark,
-          {
-            backgroundColor: theme.colors.heroStart,
-            borderRadius: theme.radius.xxl
-          }
-        ]}
-      />
-      <View style={styles.copy}>
+      <View style={styles.stack}>
         <AppText variant="label" color={theme.colors.primary}>
           Offline-first meditation
         </AppText>
-        <AppText variant="display">{title}</AppText>
-        <AppText variant="bodySmall">{subtitle}</AppText>
+        <HeroCard
+          imageUri={mediaLibrary.sunriseMeditation}
+          eyebrow="Meditation App"
+          title={title}
+          subtitle={subtitle}
+          secondaryLabel="Calm, sleep, breathe"
+        />
       </View>
     </Screen>
   );
@@ -36,15 +34,10 @@ export function SplashScreen({ title, subtitle }: SplashScreenProps): React.JSX.
 
 const styles = StyleSheet.create({
   content: {
-    gap: 24,
     justifyContent: 'center'
   },
-  mark: {
-    width: 104,
-    height: 104
-  },
-  copy: {
-    alignItems: 'center',
-    gap: 8
+  stack: {
+    gap: 16,
+    width: '100%'
   }
 });

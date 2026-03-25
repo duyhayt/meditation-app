@@ -39,7 +39,7 @@ export function AppCard({
       backgroundColor: theme.colors.card,
       borderColor: theme.colors.border,
       borderRadius: theme.radius.xl,
-      padding: theme.spacing.lg
+      padding: theme.spacing.md
     },
     elevated ? theme.shadows.medium : theme.shadows.soft,
     style

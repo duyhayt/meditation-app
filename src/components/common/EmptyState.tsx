@@ -3,9 +3,9 @@ import { View } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 
 import { AppButton } from './AppButton';
-import { AppCard } from './AppCard';
 import { AppIcon } from './AppIcon';
 import { AppText } from './AppText';
+import { ImageBackgroundCard } from './ImageBackgroundCard';
 
 type EmptyStateProps = {
   title: string;
@@ -13,6 +13,9 @@ type EmptyStateProps = {
   actionLabel?: string;
   onAction?: () => void;
 };
+
+const EMPTY_IMAGE =
+  'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?auto=format&fit=crop&w=1200&q=80';
 
 export function EmptyState({
   title,
@@ -23,35 +26,22 @@ export function EmptyState({
   const theme = useTheme();
 
   return (
-    <AppCard
-      style={{
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: theme.spacing.md,
-        paddingVertical: theme.spacing.xxxl
-      }}
-    >
-      <View
-        style={{
-          width: 56,
-          height: 56,
-          borderRadius: theme.radius.xl,
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: theme.colors.surfaceSecondary
-        }}
-      >
-        <AppIcon name="empty" size={theme.iconSize.xl} color={theme.colors.iconMuted} />
+    <ImageBackgroundCard imageUri={EMPTY_IMAGE} minHeight={240} overlayOpacity={0.5}>
+      <View />
+      <View style={{ gap: theme.spacing.md }}>
+        <View style={{ gap: theme.spacing.sm }}>
+          <AppIcon name="sparkles" color={theme.colors.white} size={theme.iconSize.xl} />
+          <AppText variant="heading2" color={theme.colors.white}>
+            {title}
+          </AppText>
+          <AppText variant="bodySmall" color="rgba(255,255,255,0.78)">
+            {description}
+          </AppText>
+        </View>
+        {actionLabel && onAction ? (
+          <AppButton label={actionLabel} onPress={onAction} fullWidth={false} />
+        ) : null}
       </View>
-      <View style={{ gap: theme.spacing.xs, alignItems: 'center' }}>
-        <AppText variant="title" style={{ textAlign: 'center' }}>
-          {title}
-        </AppText>
-        <AppText variant="bodySmall" style={{ textAlign: 'center' }}>
-          {description}
-        </AppText>
-      </View>
-      {actionLabel && onAction ? <AppButton label={actionLabel} onPress={onAction} fullWidth={false} /> : null}
-    </AppCard>
+    </ImageBackgroundCard>
   );
 }

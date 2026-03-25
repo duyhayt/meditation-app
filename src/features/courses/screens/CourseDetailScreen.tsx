@@ -1,7 +1,8 @@
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useTranslation } from 'react-i18next';
 
-import { FeatureCard } from '@/components/meditation/FeatureCard';
+import { SectionHeader } from '@/components/common/SectionHeader';
+import { MeditationCard } from '@/components/meditation/MeditationCard';
 import { MeditationScreen } from '@/components/meditation/MeditationScreen';
 import { getCourseById, getCourseLessons } from '@/features/meditation/data/phase-one-content';
 import type { RootStackParamList } from '@/types/navigation';
@@ -14,15 +15,26 @@ export function CourseDetailScreen({ navigation, route }: Props): React.JSX.Elem
   const lessons = getCourseLessons(route.params.courseId);
 
   return (
-    <MeditationScreen eyebrow="S12" title={t('courses.detailTitle')} subtitle={course?.description ?? t('courses.detailSubtitle')}>
+    <MeditationScreen
+      title={t('courses.detailTitle')}
+      subtitle={course?.description ?? t('courses.detailSubtitle')}
+      heroImageUri={course?.coverImageUri}
+      heroTitle={course?.title ?? t('courses.detailTitle')}
+      heroSubtitle={course?.description ?? t('courses.detailSubtitle')}
+      heroEyebrow={`${course?.lessonCount ?? 0} lessons`}
+      heroSize="compact"
+      showBackButton
+    >
+      <SectionHeader title="Lesson flow" description="Clear lesson rows make the course feel guided and practical." />
       {lessons.map((lesson) => (
-        <FeatureCard
+        <MeditationCard
           key={lesson.id}
-          icon="lesson"
-          eyebrow={`${lesson.durationMinutes} min`}
           title={lesson.title}
-          description={course?.title ?? ''}
-          meta="Play lesson"
+          subtitle={course?.title ?? ''}
+          durationLabel={`${lesson.durationMinutes} min`}
+          metaLabel="Lesson"
+          imageUri={lesson.coverImageUri}
+          tone="course"
           onPress={() => navigation.navigate('CourseLessonPlayer', { courseId: route.params.courseId, lessonId: lesson.id })}
         />
       ))}

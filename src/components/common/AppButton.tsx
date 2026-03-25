@@ -22,6 +22,7 @@ type AppButtonProps = Omit<PressableProps, 'children' | 'style'> & {
   loading?: boolean;
   fullWidth?: boolean;
   iconLeft?: Parameters<typeof AppIcon>[0]['name'];
+  iconRight?: Parameters<typeof AppIcon>[0]['name'];
   style?: StyleProp<ViewStyle>;
 };
 
@@ -34,6 +35,7 @@ export function AppButton({
   disabled,
   fullWidth = true,
   iconLeft,
+  iconRight,
   style,
   ...props
 }: AppButtonProps): React.JSX.Element {
@@ -48,8 +50,8 @@ export function AppButton({
       textColor: theme.colors.textOnPrimary
     },
     secondary: {
-      backgroundColor: theme.colors.surfaceSecondary,
-      borderColor: theme.colors.surfaceSecondary,
+      backgroundColor: theme.colors.surface,
+      borderColor: theme.colors.border,
       textColor: theme.colors.textPrimary
     },
     ghost: {
@@ -58,7 +60,7 @@ export function AppButton({
       textColor: theme.colors.textPrimary
     },
     outline: {
-      backgroundColor: theme.colors.card,
+      backgroundColor: theme.colors.surfaceElevated,
       borderColor: theme.colors.border,
       textColor: theme.colors.textPrimary
     },
@@ -91,10 +93,11 @@ export function AppButton({
         {
           backgroundColor: currentVariant.backgroundColor,
           borderColor: currentVariant.borderColor,
-          borderRadius: theme.radius.lg,
+          borderRadius: theme.radius.pill,
           alignSelf: fullWidth ? 'stretch' : 'flex-start',
           paddingHorizontal: theme.spacing.lg,
-          paddingVertical: theme.spacing.md
+          paddingVertical: theme.spacing.md,
+          ...theme.shadows.soft
         },
         animatedStyle,
         style
@@ -109,6 +112,7 @@ export function AppButton({
           <AppText variant="button" color={currentVariant.textColor}>
             {label}
           </AppText>
+          {iconRight ? <AppIcon name={iconRight} size={theme.iconSize.md} color={currentVariant.textColor} /> : null}
         </View>
       )}
     </AnimatedPressable>
@@ -117,7 +121,7 @@ export function AppButton({
 
 const styles = StyleSheet.create({
   button: {
-    minHeight: 52,
+    minHeight: 50,
     borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center'

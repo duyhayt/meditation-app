@@ -2,6 +2,12 @@ const en = {
   common: {
     continue: 'Continue',
     open: 'Open',
+    back: 'Back',
+    startNow: 'Start now',
+    viewAll: 'View all',
+    playNow: 'Play now',
+    setReminder: 'Set reminder',
+    continueListening: 'Continue listening',
     retry: 'Retry',
     language: 'Language',
     theme: 'Theme',
@@ -39,10 +45,15 @@ const en = {
     subtitle: 'Choose a gentle place to begin.',
     quickStart: 'Start 5-minute meditation',
     continueSession: 'Continue last session',
+    featuredTitle: 'Tonight, choose softness',
+    featuredSubtitle: 'A premium-feeling ritual for slowing down, breathing deeper, and resting more fully.',
     categories: 'Meditation paths',
+    continueTitle: 'Continue last session',
+    continueSubtitle: 'Pick up right where you left off without breaking your calm.',
     breathing: 'Breathing exercises',
     courses: 'Courses',
-    sleep: 'Sleep sounds'
+    sleep: 'Sleep sounds',
+    discover: 'Discover new calm'
   },
   meditate: {
     categoryTitle: 'Meditation library',
@@ -91,6 +102,9 @@ const en = {
   settings: {
     title: 'Settings',
     subtitle: 'Personalize language, theme, and app preferences stored on-device.',
+    appearance: 'Appearance',
+    preferences: 'Preferences',
+    accountSection: 'Later phases',
     premium: 'Premium',
     login: 'Login',
     sync: 'Sync',

@@ -14,37 +14,37 @@ export const fontWeight = {
 
 export const typography = {
   display: {
-    fontSize: 36,
-    lineHeight: 42,
+    fontSize: 34,
+    lineHeight: 40,
     fontWeight: fontWeight.bold,
     letterSpacing: -1
   },
   heading1: {
-    fontSize: 30,
-    lineHeight: 36,
+    fontSize: 28,
+    lineHeight: 34,
     fontWeight: fontWeight.bold,
     letterSpacing: -0.7
   },
   heading2: {
-    fontSize: 24,
-    lineHeight: 30,
+    fontSize: 22,
+    lineHeight: 28,
     fontWeight: fontWeight.bold,
     letterSpacing: -0.4
   },
   title: {
-    fontSize: 19,
+    fontSize: 18,
     lineHeight: 24,
     fontWeight: fontWeight.semibold,
-    letterSpacing: -0.1
+    letterSpacing: -0.2
   },
   subtitle: {
     fontSize: 16,
-    lineHeight: 23,
+    lineHeight: 22,
     fontWeight: fontWeight.medium
   },
   body: {
     fontSize: 15,
-    lineHeight: 23,
+    lineHeight: 22,
     fontWeight: fontWeight.regular
   },
   bodySmall: {
@@ -65,7 +65,7 @@ export const typography = {
     textTransform: 'uppercase' as const
   },
   button: {
-    fontSize: 16,
+    fontSize: 15,
     lineHeight: 20,
     fontWeight: fontWeight.semibold
   },
@@ -85,17 +85,17 @@ export const typography = {
     xs: 12,
     sm: 13,
     md: 15,
-    lg: 19,
-    xl: 24,
-    xxl: 36
+    lg: 18,
+    xl: 22,
+    xxl: 34
   },
   lineHeight: {
     xs: 17,
     sm: 19,
-    md: 23,
+    md: 22,
     lg: 24,
-    xl: 30,
-    xxl: 42
+    xl: 28,
+    xxl: 40
   },
   weight: fontWeight
 } as const;

@@ -20,7 +20,7 @@
 		13B07F961A680F5B00A75B9A /* RNTemplatedevelopment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RNTemplatedevelopment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = RNTemplatedevelopment/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = RNTemplatedevelopment/Info.plist; sourceTree = "<group>"; };
-		2D46F903A747D18A8E71CA3C /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = RNTemplatedevelopment/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		2D46F903A747D18A8E71CA3C /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = RNTemplatedevelopment/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		8323AA3E43DAF4E184F72221 /* Pods-RNTemplatedevelopment.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNTemplatedevelopment.release.xcconfig"; path = "Target Support Files/Pods-RNTemplatedevelopment/Pods-RNTemplatedevelopment.release.xcconfig"; sourceTree = "<group>"; };
 		8BD57818D399BB795FD494EA /* libPods-RNTemplatedevelopment.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RNTemplatedevelopment.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CE5A32F3F2ABDAFB317FF1F /* Pods-RNTemplatedevelopment.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNTemplatedevelopment.debug.xcconfig"; path = "Target Support Files/Pods-RNTemplatedevelopment/Pods-RNTemplatedevelopment.debug.xcconfig"; sourceTree = "<group>"; };
@@ -111,7 +111,6 @@
 				9CE5A32F3F2ABDAFB317FF1F /* Pods-RNTemplatedevelopment.debug.xcconfig */,
 				8323AA3E43DAF4E184F72221 /* Pods-RNTemplatedevelopment.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -343,6 +342,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = RNTemplatedevelopment/RNTemplatedevelopment.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F43A9TDXA3;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -361,7 +361,7 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.townsoftvina.reactnativetemplate;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hand.meditation.app;
 				PRODUCT_NAME = RNTemplatedevelopment;
 				SWIFT_OBJC_BRIDGING_HEADER = "RNTemplatedevelopment/RNTemplatedevelopment-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -379,6 +379,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = RNTemplatedevelopment/RNTemplatedevelopment.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F43A9TDXA3;
 				INFOPLIST_FILE = RNTemplatedevelopment/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -392,7 +393,7 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.townsoftvina.reactnativetemplate;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hand.meditation.app;
 				PRODUCT_NAME = RNTemplatedevelopment;
 				SWIFT_OBJC_BRIDGING_HEADER = "RNTemplatedevelopment/RNTemplatedevelopment-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

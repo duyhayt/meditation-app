@@ -33,8 +33,8 @@ export function AppScreen({
     styles.content,
     {
       paddingHorizontal: theme.spacing.lg,
-      paddingTop: theme.spacing.lg,
-      paddingBottom: theme.spacing.xxxl + 72
+      paddingTop: theme.spacing.md,
+      paddingBottom: theme.spacing.xxxl + 56
     },
     centered ? styles.centered : null,
     contentStyle

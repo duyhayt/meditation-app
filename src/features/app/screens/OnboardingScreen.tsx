@@ -1,57 +1,48 @@
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 
-import { AppText } from '@/components/common/AppText';
-import { Button } from '@/components/ui/Button';
+import { AppButton } from '@/components/common/AppButton';
+import { HeroCard } from '@/components/common/HeroCard';
+import { SectionHeader } from '@/components/common/SectionHeader';
+import { MeditationCard } from '@/components/meditation/MeditationCard';
 import { Screen } from '@/components/ui/Screen';
-import { useTheme } from '@/hooks/useTheme';
+import { mediaLibrary } from '@/features/meditation/data/phase-one-content';
 import { usePreferencesStore } from '@/state/preferences.store';
 
 export function OnboardingScreen(): React.JSX.Element {
   const { t } = useTranslation();
-  const theme = useTheme();
   const completeOnboarding = usePreferencesStore((state) => state.completeOnboarding);
 
   return (
     <Screen scrollable contentStyle={styles.content}>
-      <View
-        style={[
-          styles.hero,
-          {
-            backgroundColor: theme.colors.surface,
-            borderColor: theme.colors.border,
-            borderRadius: theme.radius.xxl,
-            padding: theme.spacing.xxl
-          }
-        ]}
-      >
-        <AppText variant="label" color={theme.colors.primary}>
-          {t('onboarding.eyebrow')}
-        </AppText>
-        <AppText variant="display">{t('onboarding.title')}</AppText>
-        <AppText variant="bodySmall">{t('onboarding.subtitle')}</AppText>
-      </View>
+      <HeroCard
+        imageUri={mediaLibrary.silhouette}
+        eyebrow={t('onboarding.eyebrow')}
+        title={t('onboarding.title')}
+        subtitle={t('onboarding.subtitle')}
+        secondaryLabel="Offline-first"
+      />
 
-      <View style={styles.list}>
-        {(['one', 'two', 'three'] as const).map((key) => (
-          <View
-            key={key}
-            style={[
-              styles.bullet,
-              {
-                backgroundColor: theme.colors.surfaceElevated,
-                borderColor: theme.colors.border,
-                borderRadius: theme.radius.xl,
-                padding: theme.spacing.lg
-              }
-            ]}
-          >
-            <AppText variant="body">{t(`onboarding.bullets.${key}`)}</AppText>
-          </View>
-        ))}
-      </View>
+      <SectionHeader title="Built for a calmer first impression" description="The onboarding now feels visual and premium instead of purely informational." />
+      <MeditationCard
+        title={t('onboarding.bullets.one')}
+        subtitle={t('onboarding.bullets.two')}
+        durationLabel="Foundation"
+        metaLabel="Phase 1"
+        imageUri={mediaLibrary.sunriseMeditation}
+      />
+      <MeditationCard
+        title={t('onboarding.bullets.three')}
+        subtitle="A richer visual system makes the product feel closer to a production meditation app."
+        durationLabel="Visual"
+        metaLabel="Premium UI"
+        imageUri={mediaLibrary.moonSky}
+        tone="course"
+      />
 
-      <Button label={t('onboarding.primaryCta')} onPress={completeOnboarding} />
+      <View style={styles.footer}>
+        <AppButton label={t('onboarding.primaryCta')} iconLeft="arrowRight" onPress={completeOnboarding} />
+      </View>
     </Screen>
   );
 }
@@ -61,14 +52,7 @@ const styles = StyleSheet.create({
     gap: 20,
     justifyContent: 'center'
   },
-  hero: {
-    borderWidth: 1,
-    gap: 10
-  },
-  list: {
-    gap: 12
-  },
-  bullet: {
-    borderWidth: 1
+  footer: {
+    paddingTop: 8
   }
 });

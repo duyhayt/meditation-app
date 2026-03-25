@@ -2,22 +2,33 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 
-import { AppText } from '@/components/common/AppText';
+import { AppButton } from '@/components/common/AppButton';
+import { ContentBadge } from '@/components/common/ContentBadge';
 import { MeditationScreen } from '@/components/meditation/MeditationScreen';
-import { Button } from '@/components/ui/Button';
+import { courseLessons } from '@/features/meditation/data/phase-one-content';
 import type { RootStackParamList } from '@/types/navigation';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'CourseLessonPlayer'>;
 
 export function CourseLessonPlayerScreen({ navigation, route }: Props): React.JSX.Element {
   const { t } = useTranslation();
+  const lesson = courseLessons.find((item) => item.id === route.params.lessonId);
 
   return (
-    <MeditationScreen eyebrow="S13" title={t('courses.lessonTitle')} subtitle={t('courses.lessonSubtitle')}>
+    <MeditationScreen
+      title={t('courses.lessonTitle')}
+      subtitle={t('courses.lessonSubtitle')}
+      heroImageUri={lesson?.coverImageUri}
+      heroTitle={lesson?.title ?? t('courses.lessonTitle')}
+      heroSubtitle="A lightweight lesson detail that routes into the shared player without changing playback logic."
+      heroEyebrow="Course lesson"
+      showBackButton
+    >
       <View style={styles.stack}>
-        <AppText variant="title">{route.params.lessonId}</AppText>
-        <Button
+        <ContentBadge label={`${lesson?.durationMinutes ?? 0} min`} icon="timer" />
+        <AppButton
           label="Open shared player"
+          iconLeft="play"
           onPress={() =>
             navigation.navigate('AudioPlayer', {
               contentId: route.params.lessonId,

@@ -2,6 +2,12 @@ const vi = {
   common: {
     continue: 'Tiếp tục',
     open: 'Mở',
+    back: 'Quay lại',
+    startNow: 'Bắt đầu',
+    viewAll: 'Xem tất cả',
+    playNow: 'Phát ngay',
+    setReminder: 'Đặt nhắc nhở',
+    continueListening: 'Tiếp tục nghe',
     retry: 'Thử lại',
     language: 'Ngôn ngữ',
     theme: 'Giao diện',
@@ -39,10 +45,15 @@ const vi = {
     subtitle: 'Chọn một điểm bắt đầu thật nhẹ.',
     quickStart: 'Bắt đầu bài thiền 5 phút',
     continueSession: 'Tiếp tục phiên gần nhất',
+    featuredTitle: 'Tối nay, hãy chọn sự dịu lại',
+    featuredSubtitle: 'Một nhịp ritual cao cấp hơn để chậm xuống, thở sâu hơn và nghỉ ngơi trọn vẹn hơn.',
     categories: 'Lối vào thư viện thiền',
+    continueTitle: 'Tiếp tục phiên gần nhất',
+    continueSubtitle: 'Quay lại đúng nơi bạn đang dở mà không làm đứt mạch thư giãn.',
     breathing: 'Bài tập thở',
     courses: 'Khoá học',
-    sleep: 'Âm thanh ngủ'
+    sleep: 'Âm thanh ngủ',
+    discover: 'Khám phá nội dung dịu hơn'
   },
   meditate: {
     categoryTitle: 'Thư viện thiền',
@@ -91,6 +102,9 @@ const vi = {
   settings: {
     title: 'Cài đặt',
     subtitle: 'Tùy chỉnh ngôn ngữ, giao diện và các preference cục bộ của ứng dụng.',
+    appearance: 'Giao diện',
+    preferences: 'Tùy chọn',
+    accountSection: 'Các phase sau',
     premium: 'Premium',
     login: 'Đăng nhập',
     sync: 'Đồng bộ',

@@ -2,6 +2,9 @@
 
 Debt Note App is an Expo + React Native + TypeScript codebase for an offline-first debt notebook. The current state covers Phase 1 foundation: app shell, navigation, theme system, localization, reusable UI primitives, and production-oriented project structure for later local-database work.
 
+## ID
+- com.townsoftvina.reactnativetemplate
+
 ## Stack
 
 - Expo SDK 55

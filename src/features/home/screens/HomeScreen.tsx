@@ -1,80 +1,115 @@
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useTranslation } from 'react-i18next';
-import { StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 
-import { AppText } from '@/components/common/AppText';
-import { FeatureCard } from '@/components/meditation/FeatureCard';
+import { ContinueSessionCard } from '@/components/common/ContinueSessionCard';
+import { SectionHeader } from '@/components/common/SectionHeader';
+import { CategoryCard } from '@/components/meditation/CategoryCard';
+import { MeditationCard } from '@/components/meditation/MeditationCard';
 import { MeditationScreen } from '@/components/meditation/MeditationScreen';
-import { Button } from '@/components/ui/Button';
-import { breathingExercises, meditationCategories, meditationCourses } from '@/features/meditation/data/phase-one-content';
+import {
+  breathingExercises,
+  meditationCategories,
+  meditationCourses,
+  meditations
+} from '@/features/meditation/data/phase-one-content';
 import type { RootStackParamList } from '@/types/navigation';
 
 export function HomeScreen(): React.JSX.Element {
   const { t } = useTranslation();
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const lastSession = meditations.find((item) => item.id === 'sleepy-body-scan') ?? meditations[0];
 
   return (
-    <MeditationScreen eyebrow="Meditation App" title={t('home.title')} subtitle={t('home.subtitle')}>
-      <View style={styles.actions}>
-        <Button
-          label={t('home.quickStart')}
-          onPress={() =>
-            navigation.navigate('AudioPlayer', {
-              contentId: 'five-minute-arrival',
-              contentType: 'meditation'
-            })
-          }
-        />
-        <Button
-          label={t('home.continueSession')}
-          variant="secondary"
-          onPress={() =>
-            navigation.navigate('AudioPlayer', {
-              contentId: 'sleepy-body-scan',
-              contentType: 'meditation'
-            })
-          }
-        />
-      </View>
+    <MeditationScreen
+      title={t('home.title')}
+      subtitle={t('home.subtitle')}
+      heroImageUri={meditations[0]?.coverImageUri}
+      heroTitle={t('home.featuredTitle')}
+      heroSubtitle={t('home.featuredSubtitle')}
+      heroEyebrow={t('home.discover')}
+      heroPrimaryActionLabel={t('home.quickStart')}
+      heroSecondaryLabel="5 minutes"
+      heroSize="compact"
+      onHeroPrimaryAction={() =>
+        navigation.navigate('AudioPlayer', {
+          contentId: 'five-minute-arrival',
+          contentType: 'meditation'
+        })
+      }
+    >
+      <SectionHeader title={t('home.continueTitle')} description={t('home.continueSubtitle')} />
+      <ContinueSessionCard
+        imageUri={lastSession.coverImageUri}
+        title={lastSession.title}
+        subtitle={`${lastSession.teacher} • ${lastSession.durationMinutes} min`}
+        progressLabel="42% complete"
+        onPress={() =>
+          navigation.navigate('AudioPlayer', {
+            contentId: lastSession.id,
+            contentType: 'meditation'
+          })
+        }
+      />
 
-      <AppText variant="title">{t('home.categories')}</AppText>
-      {meditationCategories.map((category) => (
-        <FeatureCard
-          key={category.id}
-          eyebrow={category.durationLabel}
-          title={category.title}
-          description={category.subtitle}
-          meta={t('common.open')}
-          onPress={() => navigation.navigate('MeditationList', { categoryId: category.id })}
-        />
-      ))}
+      <SectionHeader title={t('home.categories')} description={t('home.discover')} actionLabel={t('common.viewAll')} onAction={() => navigation.navigate('CategoryList')} />
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.horizontalContent}>
+        {meditationCategories.map((category) => (
+          <View key={category.id} style={styles.horizontalCard}>
+            <CategoryCard
+              title={category.title}
+              subtitle={category.subtitle}
+              durationLabel={category.durationLabel}
+              ambientLabel={category.ambientLabel}
+              imageUri={category.coverImageUri}
+              icon={category.tone === 'sleep' ? 'moon' : 'meditate'}
+              onPress={() => navigation.navigate('MeditationList', { categoryId: category.id })}
+            />
+          </View>
+        ))}
+      </ScrollView>
 
-      <AppText variant="title">{t('home.breathing')}</AppText>
-      <FeatureCard
-        icon="breath"
-        eyebrow={breathingExercises[0]?.durationLabel}
+      <SectionHeader title={t('home.breathing')} description="Short visual sessions to reset your body and attention." />
+      <MeditationCard
         title={breathingExercises[0]?.title ?? ''}
-        description={breathingExercises[0]?.pattern ?? ''}
-        meta={t('common.open')}
+        subtitle={breathingExercises[0]?.pattern ?? ''}
+        durationLabel={breathingExercises[0]?.durationLabel ?? ''}
+        metaLabel="Breathing"
+        imageUri={breathingExercises[0]?.coverImageUri ?? ''}
+        tone="breathing"
         onPress={() => navigation.navigate('BreathingList')}
       />
 
-      <AppText variant="title">{t('home.courses')}</AppText>
-      <FeatureCard
-        icon="course"
-        eyebrow={`${meditationCourses[0]?.lessonCount ?? 0} lessons`}
-        title={meditationCourses[0]?.title ?? ''}
-        description={meditationCourses[0]?.description ?? ''}
-        meta={t('common.open')}
-        onPress={() => navigation.navigate('CourseList')}
-      />
+      <SectionHeader title={t('home.courses')} description="Curated lesson journeys with a more structured pace." />
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.horizontalContent}>
+        {meditationCourses.map((course) => (
+          <View key={course.id} style={styles.courseCard}>
+            <MeditationCard
+              title={course.title}
+              subtitle={course.description}
+              durationLabel={`${course.totalMinutes} min`}
+              metaLabel={`${course.lessonCount} lessons`}
+              imageUri={course.coverImageUri}
+              tone="course"
+              onPress={() => navigation.navigate('CourseDetail', { courseId: course.id })}
+            />
+          </View>
+        ))}
+      </ScrollView>
     </MeditationScreen>
   );
 }
 
 const styles = StyleSheet.create({
-  actions: {
-    gap: 12
+  horizontalContent: {
+    gap: 12,
+    paddingRight: 4
+  },
+  horizontalCard: {
+    width: 256
+  },
+  courseCard: {
+    width: 232
   }
 });
