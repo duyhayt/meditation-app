@@ -6,16 +6,41 @@ import { AppButton } from '@/components/common/AppButton';
 import { AppCard } from '@/components/common/AppCard';
 import { AppText } from '@/components/common/AppText';
 import { ContentBadge } from '@/components/common/ContentBadge';
+import { EmptyState } from '@/components/common/EmptyState';
+import { LoadingState } from '@/components/common/LoadingState';
 import { SectionHeader } from '@/components/common/SectionHeader';
 import { MeditationScreen } from '@/components/meditation/MeditationScreen';
-import { getMeditationById } from '@/features/meditation/data/phase-one-content';
+import {
+  useDownloadContentMutation,
+  useMeditationDetailQuery,
+  useResolvedContentSource,
+  useRemoveDownloadedContentMutation,
+  useToggleFavoriteMutation
+} from '@/features/content/hooks/use-content-queries';
 import type { RootStackParamList } from '@/types/navigation';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'MeditationDetail'>;
 
 export function MeditationDetailScreen({ navigation, route }: Props): React.JSX.Element {
   const { t } = useTranslation();
-  const meditation = getMeditationById(route.params.meditationId);
+  const meditationQuery = useMeditationDetailQuery(route.params.meditationId);
+  const metadataQuery = useResolvedContentSource('meditation', route.params.meditationId);
+  const toggleFavoriteMutation = useToggleFavoriteMutation('meditation', route.params.meditationId);
+  const downloadMutation = useDownloadContentMutation('meditation', route.params.meditationId);
+  const removeDownloadMutation = useRemoveDownloadedContentMutation('meditation', route.params.meditationId);
+  const meditation = meditationQuery.data;
+  const resolvedSource = metadataQuery.data;
+  const metadata = resolvedSource?.metadata ?? null;
+  const favoriteLabel = metadata?.isFavorite ? t('favorites.removeAction') : t('favorites.saveAction');
+  const sourceLabel =
+    resolvedSource?.kind === 'downloaded'
+      ? t('common.downloaded')
+      : resolvedSource?.kind === 'bundled'
+        ? t('common.bundled')
+        : resolvedSource?.kind === 'stream'
+        ? t('common.streaming')
+        : t('common.unavailable');
+  const canRemoveDownload = resolvedSource?.kind === 'downloaded';
 
   return (
     <MeditationScreen
@@ -28,10 +53,26 @@ export function MeditationDetailScreen({ navigation, route }: Props): React.JSX.
       heroSize="compact"
       showBackButton
     >
+      {meditationQuery.isLoading ? <LoadingState label={t('common.loadingSessionDetail')} /> : null}
+      {meditationQuery.isError || !meditation ? (
+        <EmptyState
+          title={t('meditate.detailTitle')}
+          description={t('common.contentLoadError')}
+          actionLabel={t('common.retry')}
+          onAction={() => {
+            void meditationQuery.refetch();
+            void metadataQuery.refetch();
+          }}
+        />
+      ) : null}
+
+      {meditation ? (
+        <>
       <View style={styles.badges}>
         <ContentBadge label={t('common.minutesShort', { count: meditation?.durationMinutes ?? 0 })} icon="timer" />
         <ContentBadge label={meditation?.level ?? t('meditate.beginner')} icon="sparkles" />
         <ContentBadge label={meditation?.teacher ?? ''} icon="profile" />
+        <ContentBadge label={sourceLabel} icon="download" />
       </View>
 
       <View style={styles.actions}>
@@ -44,6 +85,24 @@ export function MeditationDetailScreen({ navigation, route }: Props): React.JSX.
               contentType: 'meditation'
             })
           }
+        />
+        <AppButton
+          label={canRemoveDownload ? t('audio.removeDownload') : t('audio.downloadForOffline')}
+          iconLeft="download"
+          variant="outline"
+          loading={downloadMutation.isPending || removeDownloadMutation.isPending}
+          onPress={() =>
+            canRemoveDownload
+              ? void removeDownloadMutation.mutateAsync()
+              : void downloadMutation.mutateAsync()
+          }
+        />
+        <AppButton
+          label={favoriteLabel}
+          iconLeft="favorite"
+          variant={metadata?.isFavorite ? 'secondary' : 'outline'}
+          loading={toggleFavoriteMutation.isPending}
+          onPress={() => void toggleFavoriteMutation.mutateAsync()}
         />
         <AppButton
           label={t('common.setReminder')}
@@ -66,6 +125,8 @@ export function MeditationDetailScreen({ navigation, route }: Props): React.JSX.
           </AppText>
         </View>
       </AppCard>
+        </>
+      ) : null}
     </MeditationScreen>
   );
 }

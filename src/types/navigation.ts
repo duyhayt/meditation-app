@@ -1,5 +1,7 @@
 import type { NavigatorScreenParams } from '@react-navigation/native';
 
+import type { ContentEntityType } from '@/domain/database';
+
 export type PublicStackParamList = {
   Onboarding: undefined;
 };
@@ -11,7 +13,7 @@ export type RootStackParamList = {
   MeditationDetail: { meditationId: string };
   AudioPlayer: {
     contentId: string;
-    contentType: 'meditation' | 'sleep_sound' | 'course_lesson';
+    contentType: ContentEntityType;
   };
   BreathingList: undefined;
   BreathingSession: { exerciseId: string };

@@ -40,10 +40,12 @@ describe('database service', () => {
 
     expect(sql).toContain('CREATE TABLE IF NOT EXISTS app_settings');
     expect(sql).toContain('CREATE TABLE IF NOT EXISTS activity_logs');
+    expect(sql).toContain('CREATE TABLE IF NOT EXISTS categories');
+    expect(sql).toContain('CREATE TABLE IF NOT EXISTS downloads');
     expect(mockDatabase.runAsync).toHaveBeenCalledWith(
       expect.stringContaining('INSERT INTO app_metadata'),
       'schema_version',
-      '1'
+      '2'
     );
   });
 });
