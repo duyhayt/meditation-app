@@ -34,38 +34,6 @@ export function useDatabaseService() {
   return useServices().databaseService;
 }
 
-export function useBackupRestoreService() {
-  return useServices().backupRestoreService;
-}
-
-export function useContactsRepository() {
-  return useServices().contactsRepository;
-}
-
-export function useDebtsRepository() {
-  return useServices().debtsRepository;
-}
-
-export function usePaymentsRepository() {
-  return useServices().paymentsRepository;
-}
-
-export function useRemindersRepository() {
-  return useServices().remindersRepository;
-}
-
-export function useReminderSchedulerService() {
-  return useServices().reminderSchedulerService;
-}
-
-export function useTagsRepository() {
-  return useServices().tagsRepository;
-}
-
 export function useSettingsRepository() {
   return useServices().settingsRepository;
-}
-
-export function useStatisticsRepository() {
-  return useServices().statisticsRepository;
 }

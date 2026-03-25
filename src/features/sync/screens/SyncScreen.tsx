@@ -1,8 +1,14 @@
 import { useTranslation } from 'react-i18next';
 
-import { PlaceholderScreen } from '@/features/settings/screens/PlaceholderScreen';
+import { FeatureCard } from '@/components/meditation/FeatureCard';
+import { MeditationScreen } from '@/components/meditation/MeditationScreen';
 
 export function SyncScreen(): React.JSX.Element {
   const { t } = useTranslation();
-  return <PlaceholderScreen code="S21" titleKey="settings.sync" description={t('placeholders.sync')} />;
+
+  return (
+    <MeditationScreen eyebrow="S21" title={t('placeholders.syncTitle')} subtitle={t('common.placeholderDescription')}>
+      <FeatureCard icon="sync" title={t('common.placeholderTitle')} description={t('common.placeholderDescription')} />
+    </MeditationScreen>
+  );
 }

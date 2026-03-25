@@ -6,17 +6,23 @@ export type PublicStackParamList = {
 
 export type RootStackParamList = {
   MainTabs: NavigatorScreenParams<AppTabsParamList>;
-  DebtDetail: { debtId: string };
-  AddDebt: { contactId?: string } | undefined;
-  EditDebt: { debtId: string };
-  AddPayment: { debtId: string };
-  PaymentHistory: { debtId: string };
-  ContactList: undefined;
-  ContactDetail: { contactId: string };
-  AddContact: { redirectTo?: 'AddDebt' | 'ContactList' } | undefined;
-  EditContact: { contactId: string };
-  ReminderCenter: { debtId?: string } | undefined;
-  BackupRestore: undefined;
+  CategoryList: undefined;
+  MeditationList: { categoryId?: string } | undefined;
+  MeditationDetail: { meditationId: string };
+  AudioPlayer: {
+    contentId: string;
+    contentType: 'meditation' | 'sleep_sound' | 'course_lesson';
+  };
+  BreathingList: undefined;
+  BreathingSession: { exerciseId: string };
+  CourseList: undefined;
+  CourseDetail: { courseId: string };
+  CourseLessonPlayer: { courseId: string; lessonId: string };
+  Favorites: undefined;
+  Progress: undefined;
+  History: undefined;
+  ReminderCenter: undefined;
+  Settings: undefined;
   Premium: undefined;
   Login: undefined;
   Sync: undefined;
@@ -25,7 +31,7 @@ export type RootStackParamList = {
 
 export type AppTabsParamList = {
   HomeTab: undefined;
-  DebtsTab: undefined;
-  StatisticsTab: undefined;
-  SettingsTab: undefined;
+  MeditateTab: undefined;
+  SleepTab: undefined;
+  ProfileTab: undefined;
 };

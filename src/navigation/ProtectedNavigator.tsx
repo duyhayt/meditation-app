@@ -1,19 +1,22 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { AccountScreen } from '@/features/account/screens/AccountScreen';
-import { ContactDetailScreen } from '@/features/contacts/screens/ContactDetailScreen';
-import { ContactListScreen } from '@/features/contacts/screens/ContactListScreen';
-import { EditContactScreen } from '@/features/contacts/screens/EditContactScreen';
-import { NewContactScreen } from '@/features/contacts/screens/NewContactScreen';
-import { AddPaymentScreen } from '@/features/debts/screens/AddPaymentScreen';
-import { DebtDetailScreen } from '@/features/debts/screens/DebtDetailScreen';
-import { EditDebtScreen } from '@/features/debts/screens/EditDebtScreen';
-import { NewDebtScreen } from '@/features/debts/screens/NewDebtScreen';
-import { PaymentHistoryScreen } from '@/features/debts/screens/PaymentHistoryScreen';
+import { AudioPlayerScreen } from '@/features/audio/screens/AudioPlayerScreen';
+import { BreathingListScreen } from '@/features/breathing/screens/BreathingListScreen';
+import { BreathingSessionScreen } from '@/features/breathing/screens/BreathingSessionScreen';
+import { CourseDetailScreen } from '@/features/courses/screens/CourseDetailScreen';
+import { CourseLessonPlayerScreen } from '@/features/courses/screens/CourseLessonPlayerScreen';
+import { CourseListScreen } from '@/features/courses/screens/CourseListScreen';
+import { FavoritesScreen } from '@/features/favorites/screens/FavoritesScreen';
+import { HistoryScreen } from '@/features/history/screens/HistoryScreen';
+import { CategoryListScreen } from '@/features/meditation/screens/CategoryListScreen';
+import { MeditationDetailScreen } from '@/features/meditation/screens/MeditationDetailScreen';
+import { MeditationListScreen } from '@/features/meditation/screens/MeditationListScreen';
 import { PremiumScreen } from '@/features/premium/screens/PremiumScreen';
+import { ProgressScreen } from '@/features/progress/screens/ProgressScreen';
 import { ReminderCenterScreen } from '@/features/reminders/screens/ReminderCenterScreen';
-import { BackupRestoreScreen } from '@/features/settings/screens/BackupRestoreScreen';
 import { LoginScreen } from '@/features/settings/screens/LoginScreen';
+import { SettingsScreen } from '@/features/settings/screens/SettingsScreen';
 import { SyncScreen } from '@/features/sync/screens/SyncScreen';
 import type { RootStackParamList } from '@/types/navigation';
 
@@ -24,18 +27,21 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 export function ProtectedNavigator(): React.JSX.Element {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false, animation: 'slide_from_right' }}>
-      <Stack.Screen name="MainTabs" component={TabsWithFab} options={{ headerShown: false }} />
-      <Stack.Screen name="DebtDetail" component={DebtDetailScreen} />
-      <Stack.Screen name="AddDebt" component={NewDebtScreen} />
-      <Stack.Screen name="EditDebt" component={EditDebtScreen} />
-      <Stack.Screen name="AddPayment" component={AddPaymentScreen} />
-      <Stack.Screen name="PaymentHistory" component={PaymentHistoryScreen} />
-      <Stack.Screen name="ContactList" component={ContactListScreen} />
-      <Stack.Screen name="ContactDetail" component={ContactDetailScreen} />
-      <Stack.Screen name="AddContact" component={NewContactScreen} />
-      <Stack.Screen name="EditContact" component={EditContactScreen} />
+      <Stack.Screen name="MainTabs" component={TabsWithFab} />
+      <Stack.Screen name="CategoryList" component={CategoryListScreen} />
+      <Stack.Screen name="MeditationList" component={MeditationListScreen} />
+      <Stack.Screen name="MeditationDetail" component={MeditationDetailScreen} />
+      <Stack.Screen name="AudioPlayer" component={AudioPlayerScreen} />
+      <Stack.Screen name="BreathingList" component={BreathingListScreen} />
+      <Stack.Screen name="BreathingSession" component={BreathingSessionScreen} />
+      <Stack.Screen name="CourseList" component={CourseListScreen} />
+      <Stack.Screen name="CourseDetail" component={CourseDetailScreen} />
+      <Stack.Screen name="CourseLessonPlayer" component={CourseLessonPlayerScreen} />
+      <Stack.Screen name="Favorites" component={FavoritesScreen} />
+      <Stack.Screen name="Progress" component={ProgressScreen} />
+      <Stack.Screen name="History" component={HistoryScreen} />
       <Stack.Screen name="ReminderCenter" component={ReminderCenterScreen} />
-      <Stack.Screen name="BackupRestore" component={BackupRestoreScreen} />
+      <Stack.Screen name="Settings" component={SettingsScreen} />
       <Stack.Screen name="Premium" component={PremiumScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Sync" component={SyncScreen} />

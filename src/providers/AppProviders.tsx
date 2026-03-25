@@ -37,8 +37,8 @@ function PreferencesDatabaseSynchronizer(): null {
   const settingsRepository = useSettingsRepository();
   const language = usePreferencesStore((state) => state.language);
   const themePreference = usePreferencesStore((state) => state.themePreference);
-  const currencyCode = usePreferencesStore((state) => state.currencyCode);
   const hasCompletedOnboarding = usePreferencesStore((state) => state.hasCompletedOnboarding);
+  const reduceMotionEnabled = usePreferencesStore((state) => state.reduceMotionEnabled);
 
   useEffect(() => {
     void settingsRepository.upsert('language', language, 'string');
@@ -49,8 +49,8 @@ function PreferencesDatabaseSynchronizer(): null {
   }, [settingsRepository, themePreference]);
 
   useEffect(() => {
-    void settingsRepository.upsert('currency_code', currencyCode, 'string');
-  }, [currencyCode, settingsRepository]);
+    void settingsRepository.upsert('reduce_motion_enabled', String(reduceMotionEnabled), 'boolean');
+  }, [reduceMotionEnabled, settingsRepository]);
 
   useEffect(() => {
     void settingsRepository.upsert(
@@ -69,7 +69,6 @@ export function AppProviders({ children }: PropsWithChildren): React.JSX.Element
   useEffect(() => {
     void services.databaseService
       .initialize()
-      .then(() => services.reminderSchedulerService.reconcile())
       .catch((error) => {
         services.loggerService.error('Failed to initialize local database', error);
       });

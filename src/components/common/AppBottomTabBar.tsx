@@ -8,9 +8,9 @@ import { AppText } from './AppText';
 
 const routeIconMap = {
   HomeTab: 'home',
-  DebtsTab: 'debts',
-  StatisticsTab: 'statistics',
-  SettingsTab: 'settings'
+  MeditateTab: 'meditate',
+  SleepTab: 'sleep',
+  ProfileTab: 'profile'
 } as const;
 
 export function AppBottomTabBar({
@@ -28,7 +28,7 @@ export function AppBottomTabBar({
         marginBottom: theme.spacing.lg,
         padding: theme.spacing.sm,
         borderRadius: theme.radius.xxl,
-        backgroundColor: theme.colors.surface,
+        backgroundColor: theme.colors.tabBar,
         borderWidth: 1,
         borderColor: theme.colors.border,
         ...theme.shadows.floating
@@ -55,7 +55,7 @@ export function AppBottomTabBar({
               gap: 4,
               minHeight: 56,
               borderRadius: theme.radius.xl,
-              backgroundColor: focused ? theme.colors.surfaceSecondary : 'transparent'
+              backgroundColor: focused ? theme.colors.chipActive : 'transparent'
             }}
           >
             <AppIcon

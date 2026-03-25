@@ -11,12 +11,12 @@ export type PreferencesState = {
   language: AppLanguage;
   themePreference: ThemePreference;
   hasCompletedOnboarding: boolean;
-  currencyCode: string;
+  reduceMotionEnabled: boolean;
   setLanguage: (language: AppLanguage) => void;
   setThemePreference: (themePreference: ThemePreference) => void;
   completeOnboarding: () => void;
   resetOnboarding: () => void;
-  setCurrencyCode: (currencyCode: string) => void;
+  setReduceMotionEnabled: (enabled: boolean) => void;
   setHasHydrated: (hasHydrated: boolean) => void;
 };
 
@@ -27,12 +27,12 @@ export const usePreferencesStore = create<PreferencesState>()(
       language: 'vi',
       themePreference: 'system',
       hasCompletedOnboarding: false,
-      currencyCode: 'VND',
+      reduceMotionEnabled: false,
       setLanguage: (language) => set({ language }),
       setThemePreference: (themePreference) => set({ themePreference }),
       completeOnboarding: () => set({ hasCompletedOnboarding: true }),
       resetOnboarding: () => set({ hasCompletedOnboarding: false }),
-      setCurrencyCode: (currencyCode) => set({ currencyCode }),
+      setReduceMotionEnabled: (reduceMotionEnabled) => set({ reduceMotionEnabled }),
       setHasHydrated: (hasHydrated) => set({ hasHydrated })
     }),
     {
@@ -42,7 +42,7 @@ export const usePreferencesStore = create<PreferencesState>()(
         language: state.language,
         themePreference: state.themePreference,
         hasCompletedOnboarding: state.hasCompletedOnboarding,
-        currencyCode: state.currencyCode
+        reduceMotionEnabled: state.reduceMotionEnabled
       }),
       onRehydrateStorage: () => (state) => {
         state?.setHasHydrated(true);

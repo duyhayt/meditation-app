@@ -1,8 +1,14 @@
 import { useTranslation } from 'react-i18next';
 
-import { PlaceholderScreen } from './PlaceholderScreen';
+import { FeatureCard } from '@/components/meditation/FeatureCard';
+import { MeditationScreen } from '@/components/meditation/MeditationScreen';
 
 export function LoginScreen(): React.JSX.Element {
   const { t } = useTranslation();
-  return <PlaceholderScreen code="S20" titleKey="settings.login" description={t('placeholders.login')} />;
+
+  return (
+    <MeditationScreen eyebrow="S20" title={t('placeholders.loginTitle')} subtitle={t('common.placeholderDescription')}>
+      <FeatureCard icon="account" title={t('common.placeholderTitle')} description={t('common.placeholderDescription')} />
+    </MeditationScreen>
+  );
 }

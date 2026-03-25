@@ -1,23 +1,10 @@
 import * as SQLite from 'expo-sqlite';
 
-import { env } from '@/config/env';
 import { getLatestSchemaVersion, runMigrations } from '@/services/db/migrations';
-import { seedDevelopmentData } from '@/services/db/seed.service';
 import type { DatabaseService, LoggerService } from '@/services/di/types';
 
-const DATABASE_NAME = 'debt-note-app.db';
-const REQUIRED_CORE_TABLES = [
-  'contacts',
-  'debts',
-  'payments',
-  'reminders',
-  'tags',
-  'debt_tags',
-  'attachments',
-  'app_settings',
-  'activity_logs',
-  'sync_metadata'
-] as const;
+const DATABASE_NAME = 'meditation-app.db';
+const REQUIRED_CORE_TABLES = ['app_settings', 'activity_logs'] as const;
 
 let databasePromise: Promise<SQLite.SQLiteDatabase> | null = null;
 let initializationPromise: Promise<void> | null = null;
@@ -88,7 +75,7 @@ export function createDatabaseService(deps: { loggerService: LoggerService }): D
         const effectiveVersion = coreSchemaReady ? currentVersion : 0;
 
         if (!coreSchemaReady && currentVersion > 0) {
-          deps.loggerService.info('Detected legacy or partial local schema, replaying baseline migrations', {
+          deps.loggerService.info('Detected incomplete Phase 1 schema, replaying shell migrations', {
             storedVersion: currentVersion
           });
         }
@@ -102,10 +89,6 @@ export function createDatabaseService(deps: { loggerService: LoggerService }): D
             to: latestVersion,
             repairedLegacySchema: !coreSchemaReady
           });
-        }
-
-        if (env.APP_ENV === 'development') {
-          await seedDevelopmentData(database);
         }
       })().catch((error) => {
         initializationPromise = null;

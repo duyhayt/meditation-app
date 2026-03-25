@@ -25,7 +25,7 @@ describe('database service', () => {
     mockDatabase.runAsync.mockClear();
   });
 
-  it('replays baseline migrations when schema version exists but core tables are missing', async () => {
+  it('replays shell migrations when schema version exists but core tables are missing', async () => {
     const loggerService = {
       info: vi.fn(),
       error: vi.fn()
@@ -38,12 +38,12 @@ describe('database service', () => {
       .map((call: unknown[]) => String(call.at(0) ?? ''))
       .join('\n');
 
-    expect(sql).toContain('CREATE TABLE IF NOT EXISTS debts');
-    expect(sql).toContain('CREATE INDEX IF NOT EXISTS idx_reminders_active_queue');
+    expect(sql).toContain('CREATE TABLE IF NOT EXISTS app_settings');
+    expect(sql).toContain('CREATE TABLE IF NOT EXISTS activity_logs');
     expect(mockDatabase.runAsync).toHaveBeenCalledWith(
       expect.stringContaining('INSERT INTO app_metadata'),
       'schema_version',
-      '2'
+      '1'
     );
   });
 });
