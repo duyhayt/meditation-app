@@ -1,61 +1,120 @@
-const audioMocks = vi.hoisted(() => {
-  const setAudioModeAsync = vi.fn(async () => undefined);
-  const loadAsync = vi.fn(async () => ({
-    isLoaded: true,
-    uri: 'file:///downloads/five-minute-arrival.wav',
-    progressUpdateIntervalMillis: 400,
-    durationMillis: 60_000,
-    positionMillis: 0,
-    shouldPlay: true,
-    isPlaying: true,
-    isBuffering: false,
-    rate: 1,
-    shouldCorrectPitch: false,
-    volume: 1,
-    isMuted: false,
-    audioPan: 0,
-    isLooping: false,
-    didJustFinish: false
+const trackPlayerMocks = vi.hoisted(() => {
+  const setupPlayer = vi.fn(async () => undefined);
+  const updateOptions = vi.fn(async () => undefined);
+  const reset = vi.fn(async () => undefined);
+  const add = vi.fn(async () => 0);
+  const play = vi.fn(async () => undefined);
+  const pause = vi.fn(async () => undefined);
+  const seekTo = vi.fn(async () => undefined);
+  const seekBy = vi.fn(async () => undefined);
+  const getActiveTrack = vi.fn(async () => ({
+    id: 'meditation:five-minute-arrival',
+    title: 'Five-Minute Arrival',
+    artwork: 'https://example.com/image.jpg',
+    duration: 60
   }));
-  const playAsync = vi.fn(async () => undefined);
-  const pauseAsync = vi.fn(async () => undefined);
-  const stopAsync = vi.fn(async () => undefined);
-  const unloadAsync = vi.fn(async () => undefined);
-  const setPositionAsync = vi.fn(async () => undefined);
-  const state = {
-    statusHandler: null as ((status: unknown) => void) | null
-  };
+  const getProgress = vi.fn(async () => ({
+    position: 50,
+    duration: 60,
+    buffered: 60
+  }));
+  const getPlaybackState = vi.fn(async () => ({
+    state: 'playing'
+  }));
+  const updateNowPlayingMetadata = vi.fn(async () => undefined);
+  const addEventListener = vi.fn(() => ({
+    remove: vi.fn()
+  }));
 
   return {
-    setAudioModeAsync,
-    loadAsync,
-    playAsync,
-    pauseAsync,
-    stopAsync,
-    unloadAsync,
-    setPositionAsync,
-    state
+    setupPlayer,
+    updateOptions,
+    reset,
+    add,
+    play,
+    pause,
+    seekTo,
+    seekBy,
+    getActiveTrack,
+    getProgress,
+    getPlaybackState,
+    updateNowPlayingMetadata,
+    addEventListener
   };
 });
+
+const sleepTimerStorageState = vi.hoisted(() => ({
+  targetEpochMs: null as number | null
+}));
 
 vi.mock('@/services/audio/bundled-audio', () => ({
   getBundledAudioModule: vi.fn(() => 1)
 }));
 
-vi.mock('expo-av', () => ({
-  Audio: {
-    setAudioModeAsync: audioMocks.setAudioModeAsync,
-    Sound: class {
-      setOnPlaybackStatusUpdate(callback: (status: unknown) => void) {
-        audioMocks.state.statusHandler = callback;
-      }
-      loadAsync = audioMocks.loadAsync;
-      playAsync = audioMocks.playAsync;
-      pauseAsync = audioMocks.pauseAsync;
-      stopAsync = audioMocks.stopAsync;
-      unloadAsync = audioMocks.unloadAsync;
-      setPositionAsync = audioMocks.setPositionAsync;
-    }
+vi.mock('@/services/audio/sleep-timer.storage', () => ({
+  getSleepTimerTargetEpochMs: vi.fn(async () => sleepTimerStorageState.targetEpochMs),
+  setSleepTimerTargetEpochMs: vi.fn(async (value: number | null) => {
+    sleepTimerStorageState.targetEpochMs = value;
+  })
+}));
+
+vi.mock('react-native-track-player', () => ({
+  __esModule: true,
+  default: {
+    setupPlayer: trackPlayerMocks.setupPlayer,
+    updateOptions: trackPlayerMocks.updateOptions,
+    reset: trackPlayerMocks.reset,
+    add: trackPlayerMocks.add,
+    play: trackPlayerMocks.play,
+    pause: trackPlayerMocks.pause,
+    seekTo: trackPlayerMocks.seekTo,
+    seekBy: trackPlayerMocks.seekBy,
+    getActiveTrack: trackPlayerMocks.getActiveTrack,
+    getProgress: trackPlayerMocks.getProgress,
+    getPlaybackState: trackPlayerMocks.getPlaybackState,
+    updateNowPlayingMetadata: trackPlayerMocks.updateNowPlayingMetadata,
+    addEventListener: trackPlayerMocks.addEventListener
+  },
+  AndroidAudioContentType: {
+    Speech: 'speech'
+  },
+  AppKilledPlaybackBehavior: {
+    ContinuePlayback: 'continue-playback'
+  },
+  Capability: {
+    Play: 'play',
+    Pause: 'pause',
+    Stop: 'stop',
+    SeekTo: 'seekTo',
+    JumpForward: 'jumpForward',
+    JumpBackward: 'jumpBackward'
+  },
+  Event: {
+    PlaybackState: 'playback-state',
+    PlaybackProgressUpdated: 'playback-progress-updated',
+    PlaybackActiveTrackChanged: 'playback-active-track-changed',
+    PlaybackQueueEnded: 'playback-queue-ended',
+    PlaybackError: 'playback-error'
+  },
+  IOSCategory: {
+    Playback: 'playback'
+  },
+  IOSCategoryMode: {
+    SpokenAudio: 'spokenAudio'
+  },
+  IOSCategoryOptions: {
+    AllowAirPlay: 'allowAirPlay'
+  },
+  State: {
+    None: 'none',
+    Ready: 'ready',
+    Playing: 'playing',
+    Paused: 'paused',
+    Stopped: 'stopped',
+    Loading: 'loading',
+    Buffering: 'buffering',
+    Error: 'error',
+    Ended: 'ended'
   }
 }));
 
@@ -63,14 +122,21 @@ import { createAudioService } from './audio.service';
 
 describe('audio service', () => {
   beforeEach(() => {
-    audioMocks.state.statusHandler = null;
-    audioMocks.setAudioModeAsync.mockClear();
-    audioMocks.loadAsync.mockClear();
-    audioMocks.playAsync.mockClear();
-    audioMocks.pauseAsync.mockClear();
-    audioMocks.stopAsync.mockClear();
-    audioMocks.unloadAsync.mockClear();
-    audioMocks.setPositionAsync.mockClear();
+    sleepTimerStorageState.targetEpochMs = null;
+
+    trackPlayerMocks.setupPlayer.mockClear();
+    trackPlayerMocks.updateOptions.mockClear();
+    trackPlayerMocks.reset.mockClear();
+    trackPlayerMocks.add.mockClear();
+    trackPlayerMocks.play.mockClear();
+    trackPlayerMocks.pause.mockClear();
+    trackPlayerMocks.seekTo.mockClear();
+    trackPlayerMocks.seekBy.mockClear();
+    trackPlayerMocks.getActiveTrack.mockClear();
+    trackPlayerMocks.getProgress.mockClear();
+    trackPlayerMocks.getPlaybackState.mockClear();
+    trackPlayerMocks.updateNowPlayingMetadata.mockClear();
+    trackPlayerMocks.addEventListener.mockClear();
   });
 
   it('loads bundled playback sources and persists a finished session on stop', async () => {
@@ -117,27 +183,11 @@ describe('audio service', () => {
       autoPlay: true
     });
 
-    audioMocks.state.statusHandler?.({
-      isLoaded: true,
-      uri: 'file:///downloads/five-minute-arrival.wav',
-      progressUpdateIntervalMillis: 400,
-      durationMillis: 60_000,
-      positionMillis: 50_000,
-      shouldPlay: true,
-      isPlaying: false,
-      isBuffering: false,
-      rate: 1,
-      shouldCorrectPitch: false,
-      volume: 1,
-      isMuted: false,
-      audioPan: 0,
-      isLooping: false,
-      didJustFinish: true
-    });
-
     await service.stop();
 
-    expect(audioMocks.loadAsync).toHaveBeenCalled();
+    expect(trackPlayerMocks.setupPlayer).toHaveBeenCalled();
+    expect(trackPlayerMocks.add).toHaveBeenCalled();
+    expect(trackPlayerMocks.play).toHaveBeenCalled();
     expect(service.getSnapshot().status).toBe('idle');
     expect(sessionHistoryRepository.add).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -146,5 +196,35 @@ describe('audio service', () => {
         isCompleted: true
       })
     );
+  });
+
+  it('stores and clears sleep timer state', async () => {
+    const service = createAudioService({
+      contentRepository: {
+        getOfflineContentMetadata: vi.fn(async () => null)
+      } as never,
+      sessionHistoryRepository: {
+        add: vi.fn(async () => undefined),
+        getLastPlayed: vi.fn(async () => null),
+        listRecent: vi.fn(async () => [])
+      } as never,
+      localFileStorageService: {
+        fileExists: vi.fn(async () => false)
+      } as never,
+      loggerService: {
+        info: vi.fn(),
+        error: vi.fn()
+      }
+    });
+
+    await service.setSleepTimer(10 * 60_000);
+
+    expect(service.getSnapshot().sleepTimerRemainingMillis).toBeGreaterThan(0);
+    expect(service.getSnapshot().sleepTimerEndsAt).not.toBeNull();
+
+    await service.clearSleepTimer();
+
+    expect(service.getSnapshot().sleepTimerRemainingMillis).toBe(0);
+    expect(service.getSnapshot().sleepTimerEndsAt).toBeNull();
   });
 });

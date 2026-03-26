@@ -1,4 +1,7 @@
 import gentleChime from '../../../assets/audio/gentle-chime.wav';
+import meditativeRain from '../../../assets/sleep/meditative-rain.mp3';
+import natureWalk from '../../../assets/sleep/nature-walk.mp3';
+import pianoMusic from '../../../assets/sleep/piano-music.mp3';
 
 export const bundledAudioAssetMap = {
   'meditation/five-minute-arrival.wav': gentleChime,
@@ -11,9 +14,9 @@ export const bundledAudioAssetMap = {
   'breathing/box-breathing.mp3': gentleChime,
   'breathing/deep-calm.mp3': gentleChime,
   'breathing/morning-boost.mp3': gentleChime,
-  'sleep/ocean-dusk.wav': gentleChime,
-  'sleep/rain-on-glass.wav': gentleChime,
-  'sleep/forest-night.wav': gentleChime
+  'sleep/piano-music.mp3': pianoMusic,
+  'sleep/meditative-rain.mp3': meditativeRain,
+  'sleep/nature-walk.mp3': natureWalk
 } as const;
 
 export type BundledAudioAssetName = keyof typeof bundledAudioAssetMap;

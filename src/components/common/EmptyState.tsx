@@ -1,11 +1,11 @@
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import { useTheme } from '@/hooks/useTheme';
 
 import { AppButton } from './AppButton';
 import { AppIcon } from './AppIcon';
 import { AppText } from './AppText';
-import { ImageBackgroundCard } from './ImageBackgroundCard';
+import { AppCard } from './AppCard';
 
 type EmptyStateProps = {
   title: string;
@@ -13,9 +13,6 @@ type EmptyStateProps = {
   actionLabel?: string;
   onAction?: () => void;
 };
-
-const EMPTY_IMAGE =
-  'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?auto=format&fit=crop&w=1200&q=80';
 
 export function EmptyState({
   title,
@@ -26,22 +23,44 @@ export function EmptyState({
   const theme = useTheme();
 
   return (
-    <ImageBackgroundCard imageUri={EMPTY_IMAGE} minHeight={240} overlayOpacity={0.5}>
-      <View />
-      <View style={{ gap: theme.spacing.md }}>
-        <View style={{ gap: theme.spacing.sm }}>
-          <AppIcon name="sparkles" color={theme.colors.white} size={theme.iconSize.xl} />
-          <AppText variant="heading2" color={theme.colors.white}>
-            {title}
-          </AppText>
-          <AppText variant="bodySmall" color="rgba(255,255,255,0.78)">
-            {description}
-          </AppText>
-        </View>
-        {actionLabel && onAction ? (
-          <AppButton label={actionLabel} onPress={onAction} fullWidth={false} />
-        ) : null}
+    <AppCard elevated style={styles.card}>
+      <View
+        style={[
+          styles.iconWrap,
+          {
+            backgroundColor: theme.colors.surfaceElevated,
+            borderColor: theme.colors.border,
+            borderRadius: theme.radius.pill
+          }
+        ]}
+      >
+        <AppIcon name="sparkles" color={theme.colors.primary} size={theme.iconSize.xl} />
       </View>
-    </ImageBackgroundCard>
+      <View style={styles.copy}>
+        <AppText variant="heading2">{title}</AppText>
+        <AppText variant="bodySmall">{description}</AppText>
+      </View>
+      {actionLabel && onAction ? (
+        <AppButton label={actionLabel} onPress={onAction} fullWidth={false} />
+      ) : null}
+    </AppCard>
   );
 }
+
+const styles = StyleSheet.create({
+  card: {
+    alignItems: 'flex-start',
+    gap: 16,
+    paddingVertical: 24
+  },
+  iconWrap: {
+    width: 56,
+    height: 56,
+    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  copy: {
+    gap: 8
+  }
+});

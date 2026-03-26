@@ -1,3 +1,5 @@
+import { appImageTokens } from '@/assets/image-registry';
+
 export type ContentTone = 'meditation' | 'sleep' | 'breathing' | 'course';
 
 export type MeditationCategory = {
@@ -37,8 +39,12 @@ export type SleepSound = {
   title: string;
   description: string;
   durationLabel: string;
+  durationSeconds?: number | null;
   coverImageUri: string;
   tone: ContentTone;
+  audioType?: 'bundled' | 'stream';
+  streamUrl?: string | null;
+  bundledAssetName?: string | null;
 };
 
 export type MeditationCourse = {
@@ -61,26 +67,16 @@ export type CourseLesson = {
 };
 
 export const mediaLibrary = {
-  sunriseMeditation:
-    'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80',
-  mountainLake:
-    'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80',
-  forestMist:
-    'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=80',
-  moonSky:
-    'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80',
-  oceanNight:
-    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80',
-  clouds:
-    'https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1200&q=80',
-  breathing:
-    'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?auto=format&fit=crop&w=1200&q=80',
-  moonForest:
-    'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1200&q=80',
-  course:
-    'https://images.unsplash.com/photo-1519834785169-98be25ec3f84?auto=format&fit=crop&w=1200&q=80',
-  silhouette:
-    'https://images.unsplash.com/photo-1508672019048-805c876b67e2?auto=format&fit=crop&w=1200&q=80'
+  sunriseMeditation: appImageTokens.sunriseMeditation,
+  mountainLake: appImageTokens.mountainLake,
+  forestMist: appImageTokens.forestMist,
+  moonSky: appImageTokens.moonSky,
+  oceanNight: appImageTokens.oceanNight,
+  clouds: appImageTokens.clouds,
+  breathing: appImageTokens.breathing,
+  moonForest: appImageTokens.moonForest,
+  course: appImageTokens.course,
+  silhouette: appImageTokens.silhouette
 } as const;
 
 export const meditationCategories: MeditationCategory[] = [
@@ -194,27 +190,39 @@ export const breathingExercises: BreathingExercise[] = [
 export const sleepSounds: SleepSound[] = [
   {
     id: 'ocean-dusk',
-    title: 'Ocean Dusk',
-    description: 'A wide shoreline wash with soft depth.',
-    durationLabel: 'Loop',
+    title: 'Sleep Piano',
+    description: 'Soft piano phrases for a steadier, quieter bedtime rhythm.',
+    durationLabel: '10 min',
+    durationSeconds: 605,
     coverImageUri: mediaLibrary.oceanNight,
-    tone: 'sleep'
+    tone: 'sleep',
+    audioType: 'bundled',
+    streamUrl: null,
+    bundledAssetName: 'sleep/piano-music.mp3'
   },
   {
     id: 'rain-on-glass',
-    title: 'Rain on Glass',
-    description: 'Warm rain with a stable, cozy texture.',
-    durationLabel: '45 min',
+    title: 'Meditative Rain',
+    description: 'Layered rainfall ambience with a soft meditative bed underneath.',
+    durationLabel: '9 min',
+    durationSeconds: 540,
     coverImageUri: mediaLibrary.moonForest,
-    tone: 'sleep'
+    tone: 'sleep',
+    audioType: 'bundled',
+    streamUrl: null,
+    bundledAssetName: 'sleep/meditative-rain.mp3'
   },
   {
     id: 'forest-night',
-    title: 'Forest Night',
-    description: 'Low wind, distant birds, and natural spaciousness.',
-    durationLabel: '60 min',
+    title: 'Nature Walk',
+    description: 'A calm outdoor soundscape for winding down without spoken guidance.',
+    durationLabel: '5 min',
+    durationSeconds: 324,
     coverImageUri: mediaLibrary.moonSky,
-    tone: 'sleep'
+    tone: 'sleep',
+    audioType: 'bundled',
+    streamUrl: null,
+    bundledAssetName: 'sleep/nature-walk.mp3'
   }
 ];
 

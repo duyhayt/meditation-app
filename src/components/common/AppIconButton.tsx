@@ -10,16 +10,19 @@ type AppIconButtonProps = {
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
   tint?: 'default' | 'light';
+  active?: boolean;
 };
 
 export function AppIconButton({
   icon,
   onPress,
   style,
-  tint = 'default'
+  tint = 'default',
+  active = false
 }: AppIconButtonProps): React.JSX.Element {
   const theme = useTheme();
   const isLight = tint === 'light';
+  const isActive = active && !isLight;
 
   return (
     <Pressable
@@ -29,8 +32,16 @@ export function AppIconButton({
       style={({ pressed }) => [
         styles.button,
         {
-          backgroundColor: isLight ? 'rgba(255,255,255,0.14)' : theme.colors.surface,
-          borderColor: isLight ? 'rgba(255,255,255,0.16)' : theme.colors.border,
+          backgroundColor: isLight
+            ? 'rgba(255,255,255,0.14)'
+            : isActive
+              ? theme.colors.primary
+              : theme.colors.surface,
+          borderColor: isLight
+            ? 'rgba(255,255,255,0.16)'
+            : isActive
+              ? theme.colors.primary
+              : theme.colors.border,
           borderRadius: theme.radius.pill,
           opacity: pressed ? 0.84 : 1
         },
@@ -39,7 +50,7 @@ export function AppIconButton({
     >
       <AppIcon
         name={icon}
-        color={isLight ? theme.colors.white : theme.colors.textPrimary}
+        color={isLight || isActive ? theme.colors.white : theme.colors.textPrimary}
         size={theme.iconSize.md}
       />
     </Pressable>

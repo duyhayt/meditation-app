@@ -15,6 +15,8 @@ export const appIconMap = {
   back: 'arrow-left',
   play: 'play-circle-outline',
   pause: 'pause-circle-outline',
+  rewind15: 'rewind-15',
+  forward15: 'fast-forward-15',
   arrowRight: 'arrow-right',
   favorite: 'heart-outline',
   favorites: 'heart-multiple-outline',

@@ -68,6 +68,8 @@ export type AudioPlaybackSnapshot = {
   progressRatio: number;
   isBuffering: boolean;
   errorMessage: string | null;
+  sleepTimerEndsAt: string | null;
+  sleepTimerRemainingMillis: number;
 };
 
 export type ResolvedPlayableSource = {
@@ -93,6 +95,8 @@ export type AudioService = {
   pause: () => Promise<void>;
   seekTo: (positionMillis: number) => Promise<void>;
   seekBy: (deltaMillis: number) => Promise<void>;
+  setSleepTimer: (durationMillis: number | null) => Promise<void>;
+  clearSleepTimer: () => Promise<void>;
   stop: () => Promise<void>;
 };
 
@@ -130,7 +134,11 @@ export type ReminderService = {
 export type SettingsRepository = {
   list: () => Promise<AppSettingRecord[]>;
   getByKey: (key: string) => Promise<AppSettingRecord | null>;
-  upsert: (key: string, value: string, valueType: AppSettingRecord['valueType']) => Promise<AppSettingRecord>;
+  upsert: (
+    key: string,
+    value: string,
+    valueType: AppSettingRecord['valueType']
+  ) => Promise<AppSettingRecord>;
 };
 
 export type ContentRepository = {
@@ -159,7 +167,10 @@ export type FavoritesRepository = {
 
 export type DownloadsRepository = {
   list: () => Promise<DownloadRecord[]>;
-  getByContent: (contentType: ContentEntityType, contentId: string) => Promise<DownloadRecord | null>;
+  getByContent: (
+    contentType: ContentEntityType,
+    contentId: string
+  ) => Promise<DownloadRecord | null>;
   upsert: (params: {
     contentType: ContentEntityType;
     contentId: string;

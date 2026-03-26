@@ -1,9 +1,16 @@
-import { ImageBackground, Pressable, StyleSheet, View, type ImageSourcePropType } from 'react-native';
+import {
+  ImageBackground,
+  Pressable,
+  StyleSheet,
+  View,
+  type ImageSourcePropType
+} from 'react-native';
 
+import { resolveAppImageSource } from '@/assets/image-registry';
 import { useTheme } from '@/hooks/useTheme';
 
 type ImageBackgroundCardProps = {
-  imageUri: string;
+  imageUri: string | null | undefined;
   minHeight?: number;
   onPress?: () => void;
   children: React.ReactNode;
@@ -19,6 +26,36 @@ export function ImageBackgroundCard({
   overlayOpacity = 0.34
 }: ImageBackgroundCardProps): React.JSX.Element {
   const theme = useTheme();
+  const source = resolveAppImageSource(imageUri);
+
+  if (!source) {
+    return (
+      <Pressable
+        onPress={onPress}
+        style={({ pressed }) => [
+          styles.wrapper,
+          {
+            minHeight,
+            borderRadius: theme.radius.xxxl,
+            backgroundColor: theme.colors.surfaceElevated,
+            opacity: pressed ? 0.94 : 1
+          }
+        ]}
+      >
+        <View
+          style={[
+            styles.content,
+            {
+              borderRadius: theme.radius.xxxl,
+              padding: theme.spacing.xl
+            }
+          ]}
+        >
+          {children}
+        </View>
+      </Pressable>
+    );
+  }
 
   return (
     <Pressable
@@ -33,7 +70,7 @@ export function ImageBackgroundCard({
       ]}
     >
       <ImageBackground
-        source={{ uri: imageUri }}
+        source={source}
         resizeMode="cover"
         style={styles.image}
         imageStyle={{ borderRadius: theme.radius.xxxl }}

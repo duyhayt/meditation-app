@@ -1,5 +1,6 @@
 import { Image, Pressable, StyleSheet, View } from 'react-native';
 
+import { resolveAppImageSource } from '@/assets/image-registry';
 import { useTheme } from '@/hooks/useTheme';
 
 import { AppText } from '../common/AppText';
@@ -25,6 +26,7 @@ export function MeditationCard({
   onPress
 }: MeditationCardProps): React.JSX.Element {
   const theme = useTheme();
+  const source = resolveAppImageSource(imageUri);
   const backgroundColor =
     tone === 'breathing'
       ? theme.colors.breathingTint
@@ -45,7 +47,13 @@ export function MeditationCard({
         }
       ]}
     >
-      <Image source={{ uri: imageUri }} resizeMode="cover" style={[styles.image, { borderRadius: theme.radius.xl }]} />
+      {source ? (
+        <Image
+          source={source}
+          resizeMode="cover"
+          style={[styles.image, { borderRadius: theme.radius.xl }]}
+        />
+      ) : null}
       <View style={styles.content}>
         <View style={styles.badges}>
           <ContentBadge label={durationLabel} icon="timer" />

@@ -1,12 +1,9 @@
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
 
 import { useTheme } from '@/hooks/useTheme';
 
+import { AppCard } from './AppCard';
 import { AppText } from './AppText';
-import { ImageBackgroundCard } from './ImageBackgroundCard';
-
-const LOADING_IMAGE =
-  'https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1200&q=80';
 
 type LoadingStateProps = {
   label?: string;
@@ -17,16 +14,40 @@ export function LoadingState({ label }: LoadingStateProps): React.JSX.Element {
   const theme = useTheme();
 
   return (
-    <ImageBackgroundCard imageUri={LOADING_IMAGE} minHeight={220} overlayOpacity={0.55}>
-      <View />
-      <View style={{ alignItems: 'center', gap: theme.spacing.md }}>
-        <ActivityIndicator color={theme.colors.white} size="large" />
-        {label ? (
-          <AppText variant="bodySmall" color="rgba(255,255,255,0.82)">
-            {label}
-          </AppText>
-        ) : null}
+    <AppCard elevated style={styles.card}>
+      <View
+        style={[
+          styles.indicatorWrap,
+          {
+            backgroundColor: theme.colors.surfaceElevated,
+            borderColor: theme.colors.border,
+            borderRadius: theme.radius.pill
+          }
+        ]}
+      >
+        <ActivityIndicator color={theme.colors.primary} size="large" />
       </View>
-    </ImageBackgroundCard>
+      {label ? (
+        <AppText variant="bodySmall" color={theme.colors.textSecondary}>
+          {label}
+        </AppText>
+      ) : null}
+    </AppCard>
   );
 }
+
+const styles = StyleSheet.create({
+  card: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 14,
+    minHeight: 180
+  },
+  indicatorWrap: {
+    width: 72,
+    height: 72,
+    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
+});

@@ -1,7 +1,12 @@
 import * as SQLite from 'expo-sqlite';
 
 import { getLatestSchemaVersion, runMigrations } from '@/services/db/migrations';
-import { getLatestSeedVersion, seedDevelopmentDatabase } from '@/services/db/seed.service';
+import {
+  getLatestContentSeedVersion,
+  getLatestDevFixtureVersion,
+  seedCoreContent,
+  seedDevelopmentDatabase
+} from '@/services/db/seed.service';
 import type { DatabaseService, LoggerService } from '@/services/di/types';
 
 const DATABASE_NAME = 'meditation-app.db';
@@ -45,7 +50,10 @@ async function ensureMetadataTable(database: SQLite.SQLiteDatabase): Promise<voi
   `);
 }
 
-async function readMetadataValue(database: SQLite.SQLiteDatabase, key: string): Promise<string | null> {
+async function readMetadataValue(
+  database: SQLite.SQLiteDatabase,
+  key: string
+): Promise<string | null> {
   const row = await database.getFirstAsync<{ value: string }>(
     'SELECT value FROM app_metadata WHERE key = ?',
     key
@@ -74,16 +82,23 @@ async function readSchemaVersion(database: SQLite.SQLiteDatabase): Promise<numbe
   return Number((await readMetadataValue(database, 'schema_version')) ?? '0');
 }
 
-async function writeSchemaVersion(database: SQLite.SQLiteDatabase, schemaVersion: number): Promise<void> {
+async function writeSchemaVersion(
+  database: SQLite.SQLiteDatabase,
+  schemaVersion: number
+): Promise<void> {
   await writeMetadataValue(database, 'schema_version', String(schemaVersion));
 }
 
-async function readSeedVersion(database: SQLite.SQLiteDatabase): Promise<number> {
-  return Number((await readMetadataValue(database, 'dev_seed_version')) ?? '0');
+async function readMetadataVersion(database: SQLite.SQLiteDatabase, key: string): Promise<number> {
+  return Number((await readMetadataValue(database, key)) ?? '0');
 }
 
-async function writeSeedVersion(database: SQLite.SQLiteDatabase, seedVersion: number): Promise<void> {
-  await writeMetadataValue(database, 'dev_seed_version', String(seedVersion));
+async function writeMetadataVersion(
+  database: SQLite.SQLiteDatabase,
+  key: string,
+  version: number
+): Promise<void> {
+  await writeMetadataValue(database, key, String(version));
 }
 
 async function hasRequiredCoreTables(database: SQLite.SQLiteDatabase): Promise<boolean> {
@@ -128,16 +143,31 @@ export function createDatabaseService(deps: { loggerService: LoggerService }): D
           });
         }
 
-        if (isDevelopmentEnvironment()) {
-          const currentSeedVersion = await readSeedVersion(database);
-          const latestSeedVersion = getLatestSeedVersion();
+        const currentContentSeedVersion = await readMetadataVersion(
+          database,
+          'content_seed_version'
+        );
+        const latestContentSeedVersion = getLatestContentSeedVersion();
 
-          if (currentSeedVersion < latestSeedVersion) {
+        if (currentContentSeedVersion < latestContentSeedVersion) {
+          await seedCoreContent(database);
+          await writeMetadataVersion(database, 'content_seed_version', latestContentSeedVersion);
+          deps.loggerService.info('Core content seed applied', {
+            from: currentContentSeedVersion,
+            to: latestContentSeedVersion
+          });
+        }
+
+        if (isDevelopmentEnvironment()) {
+          const currentDevFixtureVersion = await readMetadataVersion(database, 'dev_seed_version');
+          const latestDevFixtureVersion = getLatestDevFixtureVersion();
+
+          if (currentDevFixtureVersion < latestDevFixtureVersion) {
             await seedDevelopmentDatabase(database);
-            await writeSeedVersion(database, latestSeedVersion);
-            deps.loggerService.info('Development seed applied', {
-              from: currentSeedVersion,
-              to: latestSeedVersion
+            await writeMetadataVersion(database, 'dev_seed_version', latestDevFixtureVersion);
+            deps.loggerService.info('Development fixtures applied', {
+              from: currentDevFixtureVersion,
+              to: latestDevFixtureVersion
             });
           }
         }

@@ -1,5 +1,6 @@
 import { Image, Pressable, StyleSheet, View } from 'react-native';
 
+import { resolveAppImageSource } from '@/assets/image-registry';
 import { useTheme } from '@/hooks/useTheme';
 
 import { AppIcon } from './AppIcon';
@@ -22,6 +23,7 @@ export function ContinueSessionCard({
   onPress
 }: ContinueSessionCardProps): React.JSX.Element {
   const theme = useTheme();
+  const source = resolveAppImageSource(imageUri);
 
   return (
     <Pressable
@@ -36,7 +38,13 @@ export function ContinueSessionCard({
         }
       ]}
     >
-      <Image source={{ uri: imageUri }} resizeMode="cover" style={[styles.image, { borderRadius: theme.radius.xl }]} />
+      {source ? (
+        <Image
+          source={source}
+          resizeMode="cover"
+          style={[styles.image, { borderRadius: theme.radius.xl }]}
+        />
+      ) : null}
       <View style={styles.content}>
         <ContentBadge label={progressLabel} icon="continue" />
         <AppText variant="title">{title}</AppText>

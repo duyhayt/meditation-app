@@ -10,17 +10,22 @@ import { toSqliteBoolean } from '@/services/db/db.utils';
 
 import type { SQLiteExecutor } from './sqlite.types';
 
-const DEV_SEED_VERSION = 2;
+const CONTENT_SEED_VERSION = 4;
+const DEV_FIXTURE_VERSION = 1;
 
 function getDefaultTimestamp(): string {
   return '2026-03-25T00:00:00.000Z';
 }
 
-export function getLatestSeedVersion(): number {
-  return DEV_SEED_VERSION;
+export function getLatestContentSeedVersion(): number {
+  return CONTENT_SEED_VERSION;
 }
 
-export async function seedDevelopmentDatabase(database: SQLiteExecutor): Promise<void> {
+export function getLatestDevFixtureVersion(): number {
+  return DEV_FIXTURE_VERSION;
+}
+
+export async function seedCoreContent(database: SQLiteExecutor): Promise<void> {
   const now = getDefaultTimestamp();
 
   for (const [index, category] of meditationCategories.entries()) {
@@ -210,7 +215,9 @@ export async function seedDevelopmentDatabase(database: SQLiteExecutor): Promise
   }
 
   for (const sound of sleepSounds) {
-    const durationSeconds = sound.durationLabel === 'Loop' ? null : Number.parseInt(sound.durationLabel, 10) * 60;
+    const durationSeconds =
+      sound.durationSeconds ??
+      (sound.durationLabel === 'Loop' ? null : Number.parseInt(sound.durationLabel, 10) * 60);
 
     await database.runAsync(
       `
@@ -240,15 +247,21 @@ export async function seedDevelopmentDatabase(database: SQLiteExecutor): Promise
       durationSeconds,
       sound.coverImageUri,
       sound.tone,
-      'stream',
-      `https://cdn.example.com/audio/sleep-sounds/${sound.id}.mp3`,
-      `sleep/${sound.id}.wav`,
+      sound.audioType ?? 'stream',
+      sound.streamUrl ?? `https://cdn.example.com/audio/sleep-sounds/${sound.id}.mp3`,
+      sound.bundledAssetName ?? `sleep/${sound.id}.wav`,
       1,
       1,
       now,
       now
     );
   }
+}
+
+export async function seedDevelopmentDatabase(database: SQLiteExecutor): Promise<void> {
+  const now = getDefaultTimestamp();
+
+  await seedCoreContent(database);
 
   await database.runAsync(
     `

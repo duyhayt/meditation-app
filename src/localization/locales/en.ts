@@ -65,10 +65,12 @@ const en = {
     },
     secondaryLabel: 'Offline-first',
     sectionTitle: 'Built for a calmer first impression',
-    sectionDescription: 'The onboarding now feels visual and premium instead of purely informational.',
+    sectionDescription:
+      'The onboarding now feels visual and premium instead of purely informational.',
     cardOneDuration: 'Foundation',
     cardOneMeta: 'Phase 1',
-    cardTwoSubtitle: 'A richer visual system makes the product feel closer to a production meditation app.',
+    cardTwoSubtitle:
+      'A richer visual system makes the product feel closer to a production meditation app.',
     cardTwoDuration: 'Visual',
     cardTwoMeta: 'Premium UI'
   },
@@ -84,7 +86,8 @@ const en = {
     quickStart: 'Start 5-minute meditation',
     continueSession: 'Continue last session',
     featuredTitle: 'Tonight, choose softness',
-    featuredSubtitle: 'A premium-feeling ritual for slowing down, breathing deeper, and resting more fully.',
+    featuredSubtitle:
+      'A premium-feeling ritual for slowing down, breathing deeper, and resting more fully.',
     categories: 'Meditation paths',
     continueTitle: 'Continue last session',
     continueSubtitle: 'Pick up right where you left off without breaking your calm.',
@@ -110,7 +113,8 @@ const en = {
     playerTitle: 'Player',
     playerSubtitle: 'Phase 1 scaffolds the full-screen listening experience and flow.',
     categoryHeroTitle: 'Explore a calmer library',
-    categoryHeroSubtitle: 'Guided meditations, breathing rituals, and sleep content arranged like a real discovery app.',
+    categoryHeroSubtitle:
+      'Guided meditations, breathing rituals, and sleep content arranged like a real discovery app.',
     categoryHeroEyebrow: 'Meditate',
     featuredPathsTitle: 'Featured paths',
     featuredPathsDescription: 'Explore the main moods and use cases first.',
@@ -128,7 +132,8 @@ const en = {
     detailUiBadge: 'Detail UI',
     immersiveBadge: 'Immersive',
     noteTitle: 'Soft visual hierarchy',
-    noteDescription: 'Cleaner metadata grouping and tighter CTA spacing make the session feel calmer and more trustworthy.'
+    noteDescription:
+      'Cleaner metadata grouping and tighter CTA spacing make the session feel calmer and more trustworthy.'
   },
   breathing: {
     title: 'Breathing exercises',
@@ -136,10 +141,12 @@ const en = {
     sessionTitle: 'Breathing session',
     sessionSubtitle: 'A guided timer surface will be connected in the next phase.',
     heroTitle: 'Visual breathing rituals',
-    heroSubtitle: 'Breathing gets a brighter, lighter treatment while staying connected to the same design system.',
+    heroSubtitle:
+      'Breathing gets a brighter, lighter treatment while staying connected to the same design system.',
     heroEyebrow: 'Breathing',
     sectionTitle: 'Choose a rhythm',
-    sectionDescription: 'A stronger card hierarchy helps each exercise feel guided before the timer even starts.',
+    sectionDescription:
+      'A stronger card hierarchy helps each exercise feel guided before the timer even starts.',
     cardMeta: 'Breathing',
     sessionHeroEyebrow: 'Session',
     countdownLabel: '4',
@@ -155,7 +162,8 @@ const en = {
     heroSubtitle: 'A darker, softer visual language separates sleep from the rest of the app.',
     heroEyebrow: 'Sleep',
     sectionTitle: 'Ambient collection',
-    sectionDescription: 'Moonlit cards, deeper overlays, and calmer metadata help this tab feel distinct.'
+    sectionDescription:
+      'Moonlit cards, deeper overlays, and calmer metadata help this tab feel distinct.'
   },
   courses: {
     title: 'Meditation courses',
@@ -168,12 +176,14 @@ const en = {
     heroSubtitle: 'Courses now feel editorial and premium instead of just another plain list.',
     heroEyebrow: 'Courses',
     featuredJourneysTitle: 'Featured journeys',
-    featuredJourneysDescription: 'Multi-lesson experiences that feel distinct from one-off meditations.',
+    featuredJourneysDescription:
+      'Multi-lesson experiences that feel distinct from one-off meditations.',
     detailHeroEyebrow: '{{count}} lessons',
     flowTitle: 'Lesson flow',
     flowDescription: 'Clear lesson rows make the course feel guided and practical.',
     lessonMeta: 'Lesson',
-    lessonPlayerHeroSubtitle: 'A lightweight lesson detail that routes into the shared player without changing playback logic.',
+    lessonPlayerHeroSubtitle:
+      'A lightweight lesson detail that routes into the shared player without changing playback logic.',
     lessonPlayerHeroEyebrow: 'Course lesson',
     openSharedPlayer: 'Open shared player'
   },
@@ -188,7 +198,8 @@ const en = {
     title: 'Progress',
     subtitle: 'Daily streaks, total mindful minutes, and completion trends.',
     heroTitle: 'Progress should feel encouraging',
-    heroSubtitle: 'Larger insight cards and calmer spacing make stats feel motivating instead of clinical.',
+    heroSubtitle:
+      'Larger insight cards and calmer spacing make stats feel motivating instead of clinical.',
     heroEyebrow: 'Progress',
     sectionTitle: 'Habit signals',
     sectionDescription: 'A calmer rhythm between insight cards makes stats easier to scan.',
@@ -236,14 +247,16 @@ const en = {
     eveningTitle: 'Evening wind-down reminder',
     eveningSubtitle: '21:30 • Return to calm before bed.',
     createTitle: 'Create a local reminder',
-    createSubtitle: 'Save a schedule now. Notification delivery can plug in later without changing the data flow.',
+    createSubtitle:
+      'Save a schedule now. Notification delivery can plug in later without changing the data flow.',
     labelField: 'Reminder label',
     labelPlaceholder: 'Evening reset',
     timeField: 'Time of day',
     daysField: 'Repeat',
     saveAction: 'Save reminder',
     emptyTitle: 'No reminders yet',
-    emptyDescription: 'Create one simple reminder and it will appear here with local scheduling metadata.',
+    emptyDescription:
+      'Create one simple reminder and it will appear here with local scheduling metadata.',
     scheduleSummary: '{{time}} • {{days}}'
   },
   settings: {
@@ -258,10 +271,12 @@ const en = {
     account: 'Account',
     appearanceDescription: 'Compact controls fit this screen better than large media cards.',
     reduceMotionDescription: 'Reduce motion in transitions and decorative animations.',
-    accountSectionDescription: 'Placeholder routes stay available, but the layout is now more practical.',
+    accountSectionDescription:
+      'Placeholder routes stay available, but the layout is now more practical.',
     statusActive: 'Active',
     storageTitle: 'Local settings snapshot',
-    storageDescription: 'These values are mirrored into SQLite so future backup and restore flows have a single local source.',
+    storageDescription:
+      'These values are mirrored into SQLite so future backup and restore flows have a single local source.',
     emptyDescription: 'No local settings have been mirrored into SQLite yet.'
   },
   placeholders: {
@@ -270,16 +285,20 @@ const en = {
     syncTitle: 'Sync placeholder',
     accountTitle: 'Account placeholder',
     premiumHeroTitle: 'Premium, visually ready',
-    premiumHeroSubtitle: 'The route remains placeholder-backed, but the presentation no longer feels unfinished.',
+    premiumHeroSubtitle:
+      'The route remains placeholder-backed, but the presentation no longer feels unfinished.',
     premiumHeroEyebrow: 'Premium',
     loginHeroTitle: 'Login can still look intentional',
-    loginHeroSubtitle: 'Even placeholder screens should feel consistent with the product’s premium mood.',
+    loginHeroSubtitle:
+      'Even placeholder screens should feel consistent with the product’s premium mood.',
     loginHeroEyebrow: 'Login',
     syncHeroTitle: 'Sync placeholder, polished',
-    syncHeroSubtitle: 'Future-facing routes are now visually aligned with the rest of the experience.',
+    syncHeroSubtitle:
+      'Future-facing routes are now visually aligned with the rest of the experience.',
     syncHeroEyebrow: 'Sync',
     accountHeroTitle: 'Account surface, ready later',
-    accountHeroSubtitle: 'The route is still placeholder-only, but the UI now fits the premium meditation product better.',
+    accountHeroSubtitle:
+      'The route is still placeholder-only, but the UI now fits the premium meditation product better.',
     accountHeroEyebrow: 'Account'
   },
   audio: {
@@ -289,7 +308,8 @@ const en = {
     loopLabel: 'Loop',
     readyToPlay: 'Ready to play',
     progressLabel: '{{current}}s / {{total}}s',
-    unavailableSourceDescription: 'No playable local or streaming source is currently available for this item.',
+    unavailableSourceDescription:
+      'No playable local or streaming source is currently available for this item.',
     resume: 'Resume',
     pause: 'Pause',
     seekBack: 'Back 15s',
@@ -298,6 +318,14 @@ const en = {
     downloadForOffline: 'Download for offline',
     removeDownload: 'Remove download',
     errorTitle: 'Playback issue',
+    sleepTimerTitle: 'Sleep timer',
+    sleepTimerDescription:
+      'Automatically stop playback after the selected duration, even while the app is in the background.',
+    sleepTimerSet: 'Set timer',
+    sleepTimerChange: 'Change timer',
+    sleepTimerClear: 'Clear timer',
+    sleepTimerInactive: 'No sleep timer is active.',
+    sleepTimerActive: 'Playback will stop in {{remaining}}.',
     contentTypeMeditation: 'Meditation',
     contentTypeCourseLesson: 'Course lesson',
     contentTypeSleepSound: 'Sleep sound',
